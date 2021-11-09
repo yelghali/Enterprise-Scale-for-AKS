@@ -4,7 +4,7 @@
 
 resource "azurerm_resource_group" "velero" {
   name     = var.resource_group_name
-  location = var.resource_group_location
+  location = var.location
   tags     = var.tags
 }
 
@@ -23,7 +23,7 @@ resource "azurerm_storage_account" "velero" {
   tags = var.tags
 }
 
-resource "azurerm_storage_container" "main" {
+resource "azurerm_storage_container" "velero" {
   name                  = local.storage_container_name
   storage_account_name  = azurerm_storage_account.velero.name
   container_access_type = "private"

@@ -1,9 +1,9 @@
-output "user_assigned_identity_id" {
-  value       = azurerm_user_assigned_identity.velero.id
-  description = "ID of the user assigned identity"
+output "kube_config" {
+  value = azurerm_kubernetes_cluster.aks.kube_config_raw
+  sensitive = true
 }
 
-output "user_assigned_identity_name" {
-  value       = azurerm_user_assigned_identity.velero.name
-  description = "Name of the user assigned identity"
+output "kube_host" {
+  value = azurerm_kubernetes_cluster.aks.kube_config[0].host
+  sensitive = true
 }

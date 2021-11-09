@@ -1,54 +1,45 @@
-#############
-# VARIABLES #
-#############
-
-variable "location" {
-    default = "FranceCentral"
-
-}
-
-variable "velero_namespace" {
-    default = "backups-velero"
-
-}
-
-variable "resource_group_name" {
-    default = "backups-velero"
-
-}
-
-variable "resource_group_location" {
-    default = "FranceCentral"
-
-}
-
-variable "aks_azure_managed_rg" {
-    default = "MC_aks-draas_aks-draas-source_francecentral"
-
-}
 
 variable "tags" {
-  type = map(string)
-
+  type        = map(string)
+  description = "A mapping of tags to assign to the resource."
   default = {
-    project = "cs-aks"
+    "made-by" = "terraform"
   }
 }
 
-##########################
-# Velero variables
-##########################
+variable "resource_group_name" {
+  description = "Name of the resource group for Velero's Storage Account"
+  type        = string
+}
+
+variable "aks_nodes_resource_group_name" {
+  description = "Name of AKS nodes resource group"
+  type        = string
+}
+
+variable "nodes_subnet_id" {
+  description = "Id of the subnet used for nodes"
+  type        = string
+  default     = ""
+}
+
 variable "enable_velero" {
   description = "Enable velero on AKS cluster"
   type        = bool
   default     = true
 }
 
+variable "velero_chart_repository" {
+  description = "Helm chart repository URL"
+  type        = string
+  default     = "https://vmware-tanzu.github.io/helm-charts"
+}
+
 variable "velero_storage_settings" {
   description = <<EOVS
 Settings for Storage account and blob container for Velero
-```
-map(object({ 
+
+map(object({
   name                     = string 
   resource_group_name      = string 
   location                 = string 
@@ -59,7 +50,7 @@ map(object({
   allowed_subnet_ids       = list(string) 
   container_name           = string 
 }))
-```
+
 EOVS
   type        = map(any)
   default     = {}
@@ -67,9 +58,9 @@ EOVS
 
 variable "velero_values" {
   description = <<EOVV
-Settings for Velero helm chart:
-```
-map(object({
+Settings for Velero helm chart
+
+map(object({ 
   configuration.backupStorageLocation.bucket                = string 
   configuration.backupStorageLocation.config.resourceGroup  = string 
   configuration.backupStorageLocation.config.storageAccount = string 
@@ -95,12 +86,20 @@ map(object({
   initContainers[0].volumeMounts[0].name                    = string 
   image.repository                                          = string 
   image.tag                                                 = string 
-  image.pullPolicy                                          = string 
+  image.pullPolicy                                          = string
+  podAnnotations.aadpodidbinding                            = string
+  podLabels.aadpodidbinding                                 = string
+
 }))
-```
 EOVV
   type        = map(string)
   default     = {}
+}
+
+variable "velero_namespace" {
+  description = "Kubernetes namespace in which to deploy Velero"
+  type        = string
+  default     = "system-velero"
 }
 
 variable "velero_chart_version" {
@@ -109,60 +108,37 @@ variable "velero_chart_version" {
   default     = "2.12.13"
 }
 
-variable "velero_chart_repository" {
-  description = "URL of the Helm chart repository"
+variable "name_prefix" {
+  description = "Prefix used in naming"
   type        = string
-  default     = "https://vmware-tanzu.github.io/helm-charts"
+  default     = ""
 }
 
-##########################
-# AAD Pod Identity variables
-##########################
-variable "aadpodidentity_values" {
-  description = <<EOD
-Settings for AAD Pod identity helm Chart:
-```
-map(object({ 
-  nmi.nodeSelector.agentpool  = string 
-  mic.nodeSelector.agentpool  = string 
-  azureIdentity.enabled       = bool 
-  azureIdentity.type          = string 
-  azureIdentity.resourceID    = string 
-  azureIdentity.clientID      = string 
-  nmi.micNamespace            = string 
-}))
-```
-EOD
-  type        = map(string)
-  default     = {}
-}
-
-variable "aadpodidentity_namespace" {
-  description = "Kubernetes namespace in which to deploy AAD Pod Identity"
+variable "location" {
+  description = "Azure region to use"
   type        = string
-  default     = "system-aadpodid"
 }
 
-variable "aadpodidentity_chart_repository" {
-  description = "AAD Pod Identity Helm chart repository URL"
+variable "location_short" {
+  description = "Short name of Azure regions to use"
   type        = string
-  default     = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
+  default     = ""
 }
 
-variable "aadpodidentity_chart_version" {
-  description = "AAD Pod Identity helm chart version to use"
+variable "client_name" {
+  description = "Client name/account used in naming"
   type        = string
-  default     = "2.0.0"
+  default     = ""
 }
 
-variable "private_ingress" {
-  description = "Private ingress boolean variable. When `true`, the default http listener will listen on private IP instead of the public IP."
-  type        = bool
-  default     = false
-}
-
-variable "appgw_private_ip" {
-  description = "Private IP for Application Gateway. Used when variable `private_ingress` is set to `true`."
+variable "environment" {
+  description = "Project environment"
   type        = string
-  default     = null
+  default     = ""
+}
+
+variable "stack" {
+  description = "Project stack name"
+  type        = string
+  default     = ""
 }

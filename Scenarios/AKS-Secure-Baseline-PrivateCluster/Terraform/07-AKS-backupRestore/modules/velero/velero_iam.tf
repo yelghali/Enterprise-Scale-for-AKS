@@ -1,3 +1,7 @@
+data "azurerm_resource_group" "aks_nodes_rg" {
+  name  = var.aks_nodes_resource_group_name
+}
+
 resource "azurerm_user_assigned_identity" "velero" {
   name                = local.service_name
   resource_group_name = azurerm_resource_group.velero.name
@@ -19,6 +23,29 @@ resource "azurerm_role_assignment" "velero" {
 
 resource "azurerm_role_assignment" "velero_identity_role_aks" {
   principal_id         = azurerm_user_assigned_identity.velero.principal_id
-  scope                = "/subscriptions/f1236d4f-78b0-4b14-b0f5-a6b9838c9973/resourceGroups/MC_aks-draas_aks-draas-source_francecentral"
+  scope                = try(data.azurerm_resource_group.aks_nodes_rg.id, "")
   role_definition_name = "Contributor"
+}
+
+
+resource "helm_release" "velero_identity" {
+  depends_on = [helm_release.velero]
+  chart      = "${path.module}/aad-bindings"
+  name       = "velero-aad-bindings"
+  namespace  = kubernetes_namespace.velero.metadata[0].name
+
+  set {
+    name  = "IdentityName"
+    value = azurerm_user_assigned_identity.velero.name
+  }
+
+  set {
+    name  = "IdentityID"
+    value = azurerm_user_assigned_identity.velero.id
+  }
+
+  set {
+    name  = "IdentityClientID"
+    value = azurerm_user_assigned_identity.velero.client_id
+  }
 }
