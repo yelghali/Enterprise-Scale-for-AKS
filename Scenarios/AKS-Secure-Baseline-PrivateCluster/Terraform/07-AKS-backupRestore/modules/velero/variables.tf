@@ -99,7 +99,7 @@ EOVV
 variable "velero_namespace" {
   description = "Kubernetes namespace in which to deploy Velero"
   type        = string
-  default     = "system-velero"
+  default     = "velero"
 }
 
 variable "velero_chart_version" {

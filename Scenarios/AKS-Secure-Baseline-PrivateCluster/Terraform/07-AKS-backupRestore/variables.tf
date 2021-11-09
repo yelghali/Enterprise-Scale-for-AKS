@@ -8,7 +8,7 @@ variable "location" {
 }
 
 variable "velero_namespace" {
-    default = "backups-velero"
+    default = "velero"
 
 }
 
