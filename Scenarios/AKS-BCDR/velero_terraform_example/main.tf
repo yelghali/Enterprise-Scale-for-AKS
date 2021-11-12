@@ -4,6 +4,12 @@ data "azurerm_kubernetes_cluster" "aks" {
   resource_group_name = "testvelero"
 }
 
+data "azurerm_user_assigned_identity" "aad_pod_identity" {
+  depends_on = [azurerm_kubernetes_cluster.aks]
+  name                = "aad-pod-identity"
+  resource_group_name = data.azurerm_kubernetes_cluster.aks.node_resource_group
+}
+
 
 module "velero" {
   depends_on = [azurerm_kubernetes_cluster.aks]
@@ -25,4 +31,11 @@ module "velero" {
   velero_chart_version    = var.velero_chart_version
   velero_values           = var.velero_values
   velero_storage_settings = var.velero_storage_settings
+}
+
+
+resource "azurerm_role_assignment" "msi_aks_cp_velero_rg" {
+  scope                = format("/subscriptions/%s/resourceGroups/%s", data.azurerm_subscription.current.subscription_id, var.resource_group_name)
+  principal_id         = data.azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+  role_definition_name = "Managed Identity Operator"
 }

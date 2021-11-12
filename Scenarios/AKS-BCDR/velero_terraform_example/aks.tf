@@ -5,6 +5,15 @@ resource "azurerm_resource_group" "aks_testvelero" {
   tags     = var.tags
 }
 
+
+resource "azurerm_user_assigned_identity" "aks_user_assigned_identity" {
+
+  name                = "mi-example-aks1-aks-cp"
+  location            = "WestEurope"
+  resource_group_name = azurerm_resource_group.aks_testvelero.name
+}
+
+
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = "example-aks1"
   location            = "WestEurope"
@@ -17,8 +26,15 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vm_size    = "Standard_D2_v2"
   }
 
+
+ role_based_access_control {
+    enabled = true
+
+  }
+
   identity {
-    type = "SystemAssigned"
+    type                      = "UserAssigned"
+    user_assigned_identity_id = azurerm_user_assigned_identity.aks_user_assigned_identity.id
   }
 
   network_profile {
@@ -30,12 +46,19 @@ resource "azurerm_kubernetes_cluster" "aks" {
     load_balancer_sku  = var.network_profile.load_balancer_sku
   }
 
-  role_based_access_control {
-    enabled = true
-  }
 
 
   tags = {
     Environment = "Production"
   }
 }
+
+
+# Allow user assigned identity to manage AKS items in MC_xxx RG
+resource "azurerm_role_assignment" "aks_user_assigned" {
+  principal_id         = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+  scope                = format("/subscriptions/%s/resourceGroups/%s", data.azurerm_subscription.current.subscription_id, azurerm_kubernetes_cluster.aks.node_resource_group)
+  role_definition_name = "Contributor"
+}
+
+

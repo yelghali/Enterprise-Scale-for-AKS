@@ -142,38 +142,3 @@ variable "stack" {
   type        = string
   default     = ""
 }
-
-
-##########################
-# AAD Pod Identity variables
-##########################
-variable "aadpodidentity_values" {
-  description = <<EOD
-Settings for AAD Pod identity helm Chart:
-```
-map(object({ 
-  nmi.nodeSelector.agentpool  = string 
-  mic.nodeSelector.agentpool  = string 
-  azureIdentity.enabled       = bool 
-  azureIdentity.type          = string 
-  azureIdentity.resourceID    = string 
-  azureIdentity.clientID      = string 
-  nmi.micNamespace            = string 
-}))
-```
-EOD
-  type        = map(string)
-  default     = {}
-}
-
-variable "aadpodidentity_chart_repository" {
-  description = "AAD Pod Identity Helm chart repository URL"
-  type        = string
-  default     = "https://raw.githubusercontent.com/Azure/aad-pod-identity/master/charts"
-}
-
-variable "aadpodidentity_chart_version" {
-  description = "AAD Pod Identity helm chart version to use"
-  type        = string
-  default     = "2.0.0"
-}
