@@ -4,12 +4,6 @@ data "azurerm_kubernetes_cluster" "aks" {
   resource_group_name = "testvelero"
 }
 
-data "azurerm_user_assigned_identity" "aad_pod_identity" {
-  depends_on = [azurerm_kubernetes_cluster.aks]
-  name                = "aad-pod-identity"
-  resource_group_name = data.azurerm_kubernetes_cluster.aks.node_resource_group
-}
-
 
 module "velero" {
   depends_on = [azurerm_kubernetes_cluster.aks]
