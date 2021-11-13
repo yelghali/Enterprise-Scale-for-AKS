@@ -1,9 +1,3 @@
-data "azurerm_kubernetes_cluster" "aks" {
-  depends_on = [azurerm_kubernetes_cluster.aks]
-  name                = "example-aks1"
-  resource_group_name = "testvelero"
-}
-
 
 module "velero" {
   depends_on = [azurerm_kubernetes_cluster.aks]
