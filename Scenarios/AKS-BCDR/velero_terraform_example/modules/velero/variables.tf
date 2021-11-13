@@ -1,4 +1,3 @@
-
 variable "tags" {
   type        = map(string)
   description = "A mapping of tags to assign to the resource."
@@ -15,18 +14,6 @@ variable "resource_group_name" {
 variable "aks_nodes_resource_group_name" {
   description = "Name of AKS nodes resource group"
   type        = string
-}
-
-variable "nodes_subnet_id" {
-  description = "Id of the subnet used for nodes"
-  type        = string
-  default     = ""
-}
-
-variable "enable_velero" {
-  description = "Enable velero on AKS cluster"
-  type        = bool
-  default     = true
 }
 
 variable "velero_chart_repository" {
