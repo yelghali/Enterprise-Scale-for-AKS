@@ -6,12 +6,12 @@ resource "azurerm_resource_group" "aks_testvelero" {
 }
 
 
-resource "azurerm_user_assigned_identity" "aks_user_assigned_identity" {
-
-  name                = "mi-example-aks1-aks-cp"
-  location            = "WestEurope"
-  resource_group_name = azurerm_resource_group.aks_testvelero.name
-}
+#resource "azurerm_user_assigned_identity" "aks_user_assigned_identity" {
+#
+#  name                = "mi-example-aks1-aks-cp"
+#  location            = "WestEurope"
+#  resource_group_name = azurerm_resource_group.aks_testvelero.name
+#}
 
 
 resource "azurerm_kubernetes_cluster" "aks" {
@@ -33,8 +33,9 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   identity {
-    type                      = "UserAssigned"
-    user_assigned_identity_id = azurerm_user_assigned_identity.aks_user_assigned_identity.id
+    type                      = "SystemAssigned"
+    #type                      = "UserAssigned"
+    #user_assigned_identity_id = azurerm_user_assigned_identity.aks_user_assigned_identity.id
   }
 
   network_profile {

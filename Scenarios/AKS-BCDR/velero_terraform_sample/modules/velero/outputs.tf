@@ -8,3 +8,7 @@ output "user_assigned_identity_name" {
   description = "Name of the user assigned identity"
 }
 
+output "backup_storage_account_id" {
+  value       = azurerm_storage_account.velero.id
+  description = "ID of the storage account used to store backups"
+}

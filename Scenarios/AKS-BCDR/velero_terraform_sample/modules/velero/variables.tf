@@ -11,6 +11,24 @@ variable "resource_group_name" {
   type        = string
 }
 
+variable "velero_sp_tenantID" {
+  description = "Tenant ID for service pricinpal used by velero/restic"
+  type        = string
+  default = ""
+}
+
+variable "velero_sp_clientID" {
+  description = "Client ID for service pricinpal used by velero/restic"
+  type        = string
+  default = ""
+}
+
+variable "velero_sp_clientSecret" {
+  description = "Client Secret for service pricinpal used by velero/restic"
+  type        = string
+  default = ""
+}
+
 variable "aks_nodes_resource_group_name" {
   description = "Name of AKS nodes resource group"
   type        = string

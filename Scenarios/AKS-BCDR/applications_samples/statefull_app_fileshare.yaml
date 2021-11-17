@@ -1,0 +1,59 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: myazurefile
+provisioner: kubernetes.io/azure-file
+mountOptions:
+  - dir_mode=0777
+  - file_mode=0777
+  - uid=0
+  - gid=0
+  - mfsymlinks
+  - cache=strict
+  - actimeo=30
+  - nouser_xattr
+parameters:
+  skuName: Standard_LRS
+
+---
+
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: myazurefile
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: myazurefile
+  resources:
+    requests:
+      storage: 5Gi
+
+
+---
+
+kind: Pod
+apiVersion: v1
+metadata:
+  annotations:
+    backup.velero.io/backup-volumes: myvolumefileshare
+  name: mypodfileshare
+spec:
+  containers:
+  - name: mypod
+    image: mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 250m
+        memory: 256Mi
+    volumeMounts:
+    - mountPath: "/mnt/azure"
+      name: myvolumefileshare
+  volumes:
+    - name: myvolumefileshare
+      persistentVolumeClaim:
+        claimName: myazurefile

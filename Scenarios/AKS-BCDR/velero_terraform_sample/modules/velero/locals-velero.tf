@@ -3,6 +3,9 @@ locals {
 AZURE_SUBSCRIPTION_ID = ${try(data.azurerm_subscription.current.subscription_id, "")}
 AZURE_RESOURCE_GROUP = ${var.aks_nodes_resource_group_name}
 AZURE_CLOUD_NAME = AzurePublicCloud
+AZURE_TENANT_ID = ${var.velero_sp_tenantID}
+AZURE_CLIENT_ID = ${var.velero_sp_clientID}
+AZURE_CLIENT_SECRET = ${var.velero_sp_clientSecret}
 EOF
 
   name_prefix = var.name_prefix != "" ? replace(var.name_prefix, "/[a-z0-9]/", "$0-") : ""
@@ -26,7 +29,7 @@ EOF
     "configuration.backupStorageLocation.config.storageAccount" = try(azurerm_storage_account.velero.name, "")
     "configuration.backupStorageLocation.name"                  = "default"
     "configuration.provider"                                    = "azure"
-    "configuration.volumeSnapshotLocation.config.resourceGroup" = try(var.aks_nodes_resource_group_name, "")
+    "configuration.volumeSnapshotLocation.config.resourceGroup" = try(var.resource_group_name, "")
     "configuration.volumeSnapshotLocation.name"                 = "default"
     "credentials.existingSecret"                                = try(kubernetes_secret.velero.metadata[0].name, "")
     "credentials.useSecret"                                     = "true"

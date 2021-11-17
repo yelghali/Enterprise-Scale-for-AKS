@@ -1,0 +1,63 @@
+
+#Create Service Principal to be used by velero/restic: if you need restic (for fileshare backup), currently restic does not support Azure managed identity
+resource "azuread_application" "velero_sp_app" {
+  display_name = "velero Service Principal App"
+  owners       = [data.azuread_client_config.current.object_id]
+}
+
+resource "azuread_service_principal" "velero_sp" {
+  application_id = azuread_application.velero_sp_app.application_id
+  app_role_assignment_required = false
+  owners                       = [data.azuread_client_config.current.object_id]
+
+}
+
+resource "azuread_service_principal_password" "velero_sp_password" {
+  service_principal_id = azuread_service_principal.velero_sp.object_id
+}
+
+resource "azurerm_role_assignment" "sp_velero_backup_rg" {
+  scope                = format("/subscriptions/%s/resourceGroups/%s", data.azurerm_subscription.current.subscription_id, var.resource_group_name)
+  principal_id         = azuread_service_principal.velero_sp.object_id
+  role_definition_name = "Contributor"
+}
+
+resource "azurerm_role_assignment" "sp_velero_aks_node_rg" {
+  scope                = format("/subscriptions/%s/resourceGroups/%s", data.azurerm_subscription.current.subscription_id, data.azurerm_kubernetes_cluster.aks.node_resource_group)
+  principal_id         = azuread_service_principal.velero_sp.object_id
+  role_definition_name = "Contributor"
+}
+
+module "velero" {
+  depends_on = [azurerm_kubernetes_cluster.aks]
+
+  source = "./modules/velero"
+
+  providers = {
+    kubernetes = kubernetes.aks-module
+    helm       = helm.aks-module
+  }
+
+  location       = var.location
+
+  resource_group_name           = var.resource_group_name
+  aks_nodes_resource_group_name = data.azurerm_kubernetes_cluster.aks.node_resource_group
+
+  velero_sp_tenantID = "72f988bf-86f1-41af-91ab-2d7cd011db47" 
+  velero_sp_clientID = azuread_service_principal.velero_sp.object_id 
+  velero_sp_clientSecret = azuread_service_principal_password.velero_sp_password.value 
+
+  velero_namespace        = var.velero_namespace
+  velero_chart_repository = var.velero_chart_repository
+  velero_chart_version    = var.velero_chart_version
+  velero_values           = var.velero_values
+  velero_storage_settings = var.velero_storage_settings
+}
+
+
+resource "azurerm_role_assignment" "msi_aks_cp_velero_rg" {
+  scope                = format("/subscriptions/%s/resourceGroups/%s", data.azurerm_subscription.current.subscription_id, var.resource_group_name)
+  principal_id         = data.azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+  role_definition_name = "Managed Identity Operator"
+}
+
