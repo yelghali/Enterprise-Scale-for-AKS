@@ -23,6 +23,11 @@ You need to install velero cli: https://velero.io/docs/v1.7/basic-install/#insta
 
 sample commands for backup restore using velero cli --> You can not use "sudo" on Azure Integrated console, you can the download the cli binary but you'll to reference its path : e.g alias velero=/home/user/velero
 
+
+Get AKS credentials: 
+e.g using default values with provided example:az aks get-credentials --name example-aks1 --overwrite-existing --resource-group testvelero
+
+
 velero backup-location get
 
 velero backup get
