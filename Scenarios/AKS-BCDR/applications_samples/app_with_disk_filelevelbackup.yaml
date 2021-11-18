@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: azure-managed-disk
+  name: azure-managed-diskfc
 spec:
   accessModes:
   - ReadWriteOnce
@@ -16,7 +16,9 @@ spec:
 kind: Pod
 apiVersion: v1
 metadata:
-  name: mypoddisk
+  annotations:
+    backup.velero.io/backup-volumes: myvolumediskfc
+  name: mypoddiskfilecopy
 spec:
   containers:
   - name: mypod
@@ -30,8 +32,8 @@ spec:
         memory: 256Mi
     volumeMounts:
     - mountPath: "/mnt/azure"
-      name: myvolumedisk2
+      name: myvolumediskfc
   volumes:
-    - name: myvolumedisk2
+    - name: myvolumediskfc
       persistentVolumeClaim:
-        claimName: azure-managed-disk
+        claimName: azure-managed-diskfc
