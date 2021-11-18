@@ -59,9 +59,16 @@ module "velero" {
 }
 
 #Assign bakup storage account access to velero SP
-resource "azurerm_role_assignment" "velero" {
+#resource "azurerm_role_assignment" "velero" {
+#  depends_on = [azurerm_kubernetes_cluster.aks,module.velero]
+#  scope                = module.velero.backup_storage_account_id
+#  role_definition_name = "Contributor"
+#  principal_id         = data.azuread_service_principal.velero_sp.object_id
+#}
+
+resource "azurerm_role_assignment" "snapshot" {
   depends_on = [azurerm_kubernetes_cluster.aks,module.velero]
-  scope                = module.velero.backup_storage_account_id
+  scope                = module.velero.backup_resource_group_id
   role_definition_name = "Contributor"
   principal_id         = data.azuread_service_principal.velero_sp.object_id
 }

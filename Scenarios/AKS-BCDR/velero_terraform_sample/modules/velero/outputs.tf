@@ -12,3 +12,8 @@ output "backup_storage_account_id" {
   value       = azurerm_storage_account.velero.id
   description = "ID of the storage account used to store backups"
 }
+
+output "backup_resource_group_id" {
+  value       = azurerm_resource_group.velero.id
+  description = "ID of the Resource Group used to store backups"
+}
