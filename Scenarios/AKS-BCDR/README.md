@@ -1,6 +1,6 @@
 
 What does the example provide:
-* deploy sample AKS with POD Managed Identity + Network driver Azure CNI
+* deploy sample AKS with POD Managed Identity + Network driver Azure CNI  --> using default pool with 3 nodes in 3 availability-zones
 * deploy ressource group + storage account for storing backups
 * Configure AKS cluster with Velero server side resources and integrate with Storage location
 
