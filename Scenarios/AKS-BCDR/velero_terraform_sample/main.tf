@@ -15,7 +15,7 @@ data "azurerm_kubernetes_cluster" "aks" {
 
 #Service Principal to be used by velero/restic: if you need restic (for fileshare backup), currently restic does not support Azure managed identity
 data "azuread_service_principal" "velero_sp" {
-  display_name = "backup-velero-sp"
+  display_name = "sp-velero-backup"
 }
 
 
@@ -59,12 +59,12 @@ module "velero" {
 }
 
 #Assign bakup storage account access to velero SP
-#resource "azurerm_role_assignment" "velero" {
-#  depends_on = [azurerm_kubernetes_cluster.aks,module.velero]
-#  scope                = module.velero.backup_storage_account_id
-#  role_definition_name = "Contributor"
-#  principal_id         = data.azuread_service_principal.velero_sp.object_id
-#}
+resource "azurerm_role_assignment" "velero" {
+  depends_on = [azurerm_kubernetes_cluster.aks,module.velero]
+  scope                = module.velero.backup_storage_account_id
+  role_definition_name = "Contributor"
+  principal_id         = data.azuread_service_principal.velero_sp.object_id
+}
 
 resource "azurerm_role_assignment" "snapshot" {
   depends_on = [azurerm_kubernetes_cluster.aks,module.velero]
