@@ -59,6 +59,15 @@ EOF
     "podLabels.aadpodidbinding"                                 = local.velero_identity_name
   }
 
+  azurefile_csi_driver_default_values = {
+  }
+
+  azurefile_csi_driver_values = merge(local.azurefile_csi_driver_default_values, var.azurefile_csi_driver_values)
+
+  azuredisk_csi_driver_default_values = {
+  }
+
+  azuredisk_csi_driver_values = merge(local.azuredisk_csi_driver_default_values, var.azuredisk_csi_driver_values)
 
   velero_credentials = local.credentials
   velero_storage     = merge(local.storage_defaults_settings, var.velero_storage_settings)

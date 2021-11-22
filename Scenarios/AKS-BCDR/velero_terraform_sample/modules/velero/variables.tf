@@ -113,6 +113,70 @@ variable "velero_chart_version" {
   default     = "2.12.13"
 }
 
+#CSI Driver for Azure File
+variable "azurefile_csi_driver_namespace" {
+  description = "Kubernetes namespace in which to deploy CSI Driver for Azure File"
+  type        = string
+  default     = "azurefile-csi-driver"
+}
+
+variable "azurefile_csi_driver_chart_version" {
+  description = "helm chart version to use for CSI Driver for Azure File"
+  type        = string
+  default     = "1.8.0"
+}
+
+variable "azurefile_csi_driver_chart_repository" {
+  description = "helm chart URL to use for CSI Driver for Azure File"
+  type        = string
+  default     = "https://raw.githubusercontent.com/kubernetes-sigs/azurefile-csi-driver/master/charts"
+}
+
+variable "azurefile_csi_driver_values" {
+  description = <<EOVV
+Settings for Azure File CSI Driver helm chart
+
+map(object({ 
+
+}))
+EOVV
+  type        = map(string)
+  default     = {}
+}
+
+#CSI Driver for Azure Disk
+variable "azuredisk_csi_driver_namespace" {
+  description = "Kubernetes namespace in which to deploy CSI Driver for Azure Disk"
+  type        = string
+  default     = "azuredisk-csi-driver"
+}
+
+variable "azuredisk_csi_driver_chart_version" {
+  description = "helm chart version to use for CSI Driver for Azure Disk"
+  type        = string
+  default     = "1.8.0"
+}
+
+variable "azuredisk_csi_driver_chart_repository" {
+  description = "helm chart URL to use for CSI Driver for Azure Disk"
+  type        = string
+  default     = "https://raw.githubusercontent.com/kubernetes-sigs/azuredisk-csi-driver/master/charts"
+}
+
+variable "azuredisk_csi_driver_values" {
+  description = <<EOVV
+Settings for Azure Disk CSI Driver helm chart
+
+map(object({ 
+
+}))
+EOVV
+  type        = map(string)
+  default     = {}
+}
+
+
+#Naming conventions
 variable "name_prefix" {
   description = "Prefix used in naming"
   type        = string
