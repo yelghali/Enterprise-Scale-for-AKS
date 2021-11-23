@@ -47,6 +47,11 @@ EOF
     "initContainers[0].image"                                   = "velero/velero-plugin-for-microsoft-azure:v1.1.1"
     "initContainers[0].volumeMounts[0].mountPath"               = "/target"
     "initContainers[0].volumeMounts[0].name"                    = "plugins"
+    "initContainers[1].name"                                    = "velero-plugin-for-csi"
+    "initContainers[1].image"                                   = "velero/velero-plugin-for-csi:v0.1.1"
+    "initContainers[1].volumeMounts[0].mountPath"               = "/target"
+    "initContainers[1].volumeMounts[0].name"                    = "plugins"
+    "features"                                                  = "EnableCSI"
     "image.repository"                                          = "velero/velero"
     "image.tag"                                                 = "v1.4.0"
     "image.pullPolicy"                                          = "IfNotPresent"
@@ -55,11 +60,14 @@ EOF
   }
 
   azurefile_csi_driver_default_values = {
+    #"snapshot.enabled"                                                  = "true"
   }
 
   azurefile_csi_driver_values = merge(local.azurefile_csi_driver_default_values, var.azurefile_csi_driver_values)
 
   azuredisk_csi_driver_default_values = {
+    "snapshot.enabled"                                                  = "true"
+    "snapshot.apiVersion"                                                  = "ga"
   }
 
   azuredisk_csi_driver_values = merge(local.azuredisk_csi_driver_default_values, var.azuredisk_csi_driver_values)

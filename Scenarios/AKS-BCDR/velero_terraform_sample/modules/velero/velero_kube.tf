@@ -81,7 +81,9 @@ resource "helm_release" "velero" {
     kubernetes_secret.velero,
     kubernetes_namespace.velero,
     azurerm_storage_account.velero,
-  azurerm_storage_container.velero]
+  azurerm_storage_container.velero,
+  helm_release.azuredisk_csi_driver,
+  helm_release.azurefile_csi_driver]
   name       = "velero"
   chart      = "velero"
   repository = var.velero_chart_repository

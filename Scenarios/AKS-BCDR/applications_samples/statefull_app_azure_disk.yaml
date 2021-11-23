@@ -5,8 +5,7 @@ metadata:
 spec:
   accessModes:
   - ReadWriteOnce
-  #storageClassName: default
-  storageClassName: standard-hdd-retain
+  storageClassName: default
   resources:
     requests:
       storage: 5Gi
