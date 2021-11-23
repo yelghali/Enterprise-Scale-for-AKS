@@ -26,19 +26,30 @@ for storage sources (Storage Class Configuration)
 
 ## Disaster Recovey Considerations
 
+Prepare Identities
+
+Cluster Deployment
+
 Node Pool Configuration
 ** Create Nodes & re-deploy Node Configuration
 ** Use Node Configuration Snapshot (currently in Preview)
 
 For a **Stateless** Application: 
-** Redeploy Application Configuration 
+*Redeploy Application Configuration 
 
 For a **statefull** Application, you need to backup & Restore:
 ** Persistent Volumes (Azure Disk & Azure Fileshare)
 ** Cluster configuration (technical pods)
 ** Application Configuration (linked with the restored persistent volumes)
 
-##
+## Risk / RPO/RTO based scenarios
+
+## Backup Options
+
+## AKS Disaster & Recovery 3rd party solutions 
+
+## Practical example with Velero open source solution:
+
 
 ## A future workload for this scenario will include the following 
 * Terraform example of Recovery to Another cluster
