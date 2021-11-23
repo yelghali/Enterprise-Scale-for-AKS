@@ -11,6 +11,8 @@ Cluster Infrastructure:
 * Use multiple node pools & nodes spanning AZs
 * Configure Taints & Tolerations , Pod Affinity
 * Use Toplogy Aware scheduling (optimally route traffic within the same zone to avoid latency)
+* Use Virtual Nodes to quicly span new containers
+
 * TODO: example / best practice for Taints & Tolerations using AZs
 
 for storage sources (Storage Class Configuration)
