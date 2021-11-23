@@ -3,7 +3,10 @@
 
 building on: https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-multi-region#next-steps
 
-![Architectural diagram for the secure baseline scenario.](./media/AKS-private-cluster-scenario.jpg)
+
+
+## Risk / RPO/RTO based scenarios
+
 
 ## High Availability Considerations
 Cluster Infrastructure:
@@ -43,8 +46,6 @@ For a **statefull** Application, you need to backup & Restore:
 ** Persistent Volumes (Azure Disk & Azure Fileshare)
 ** Cluster configuration (technical pods)
 ** Application Configuration (linked with the restored persistent volumes)
-
-## Risk / RPO/RTO based scenarios
 
 ## How Application Backup & Restore Works
 
