@@ -10,6 +10,7 @@ building on: https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-
 
 ## High Availability Considerations
 Cluster Infrastructure:
+* Enable Uptime SLA for production workloads
 * Use Availability Zones
 * Use multiple node pools & nodes spanning AZs
 * Configure Taints & Tolerations , Pod Affinity
