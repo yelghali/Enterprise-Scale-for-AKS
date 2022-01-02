@@ -19,6 +19,54 @@ data "azurerm_kubernetes_cluster" "aks_dr" {
   resource_group_name = "aks-dr"
 }
 
+ #Prepare Service principal used by velero/restric 
+
+data "azuread_service_principal" "velero_sp" {
+  display_name = "sp-velero-yaya"
+}
+
+data "azurerm_resource_group" "velero" {
+  name  = var.backups_rg_name
+}
+
+
+data "azurerm_storage_account" "velero" {
+  name  = var.backups_stracc_name
+  resource_group_name  = var.backups_rg_name
+}
+
+#Create Resources
+resource "azuread_service_principal_password" "velero_sp_password" {
+  service_principal_id = data.azuread_service_principal.velero_sp.object_id
+}
+
+
+
+#Create Role Assignments for velero sp
+resource "azurerm_role_assignment" "sp_velero_aks_node_rg" {
+  scope                = format("/subscriptions/%s/resourceGroups/%s", data.azurerm_subscription.current.subscription_id, data.azurerm_kubernetes_cluster.aks.node_resource_group)
+  principal_id         = data.azuread_service_principal.velero_sp.object_id
+  role_definition_name = "Contributor"
+}
+
+#Assign bakup storage account access to velero SP
+resource "azurerm_role_assignment" "velero" {
+  scope                = data.azurerm_storage_account.velero.id
+  role_definition_name = "Contributor"
+  principal_id         = data.azuread_service_principal.velero_sp.object_id
+}
+
+resource "azurerm_role_assignment" "snapshot" {
+  scope                = data.azurerm_resource_group.velero.id
+  role_definition_name = "Contributor"
+  principal_id         = data.azuread_service_principal.velero_sp.object_id
+}
+
+#resource "azurerm_role_assignment" "msi_aks_cp_velero_rg" {
+#  scope                = format("/subscriptions/%s/resourceGroups/%s", data.azurerm_subscription.current.subscription_id, var.resource_group_name)
+#  principal_id         = data.azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
+#  role_definition_name = "Managed Identity Operator"
+#}
 
 #Deploy Velero on source cluster AKS1
 module "velero" {
@@ -42,6 +90,12 @@ module "velero" {
   velero_chart_repository = var.velero_chart_repository
   velero_chart_version    = var.velero_chart_version
   velero_values           = var.velero_values
+  velero_restore_mode_only           = "false" #default value
+
+
+  velero_sp_tenantID = data.azurerm_client_config.current.tenant_id 
+  velero_sp_clientID = data.azuread_service_principal.velero_sp.application_id 
+  velero_sp_clientSecret = azuread_service_principal_password.velero_sp_password.value 
 }
 
 
@@ -60,7 +114,8 @@ module "veleroaksdr" {
   backups_region       = var.backups_region
   backups_rg_name           = var.backups_rg_name
   backups_stracc_name           = var.backups_stracc_name
-  backups_stracc_container_name           = "veleroforaksdr"  #todo: put in var
+  backups_stracc_container_name           = var.backups_stracc_container_name
+  #backups_stracc_container_name           = "veleroforaksdr"  #todo: put in var
   aks_nodes_resource_group_name = data.azurerm_kubernetes_cluster.aks_dr.node_resource_group
   
   velero_azureidentity_name = "veleroaksdr"
@@ -68,4 +123,10 @@ module "veleroaksdr" {
   velero_chart_repository = var.velero_chart_repository
   velero_chart_version    = var.velero_chart_version
   velero_values           = var.velero_values
+  velero_restore_mode_only           = "true"
+
+
+  velero_sp_tenantID = data.azurerm_client_config.current.tenant_id 
+  velero_sp_clientID = data.azuread_service_principal.velero_sp.application_id 
+  velero_sp_clientSecret = azuread_service_principal_password.velero_sp_password.value 
 }

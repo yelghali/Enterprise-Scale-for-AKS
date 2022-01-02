@@ -35,6 +35,12 @@ variable "velero_sp_clientID" {
   default = ""
 }
 
+variable "velero_restore_mode_only" {
+  description = "Access mode for velero : backup/restore or restore only"
+  type        = string
+  default = "false"
+}
+
 variable "velero_sp_clientSecret" {
   description = "Client Secret for service pricinpal used by velero/restic"
   type        = string
