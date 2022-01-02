@@ -73,7 +73,7 @@ EOF
   azuredisk_csi_driver_values = merge(local.azuredisk_csi_driver_default_values, var.azuredisk_csi_driver_values)
 
   velero_credentials = local.credentials
-  velero_storage     = merge(local.storage_defaults_settings, var.velero_storage_settings)
+  #velero_storage     = merge(local.storage_defaults_settings, var.velero_storage_settings)
   velero_values      = local.velero_default_values
 
   velero_identity_name = try(var.velero_azureidentity_name, "velero")

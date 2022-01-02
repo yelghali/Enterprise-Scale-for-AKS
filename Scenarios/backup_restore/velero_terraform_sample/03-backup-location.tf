@@ -12,7 +12,6 @@ resource "azurerm_storage_account" "aks1_backups" {
   name                     = var.backups_stracc_name
   resource_group_name      = azurerm_resource_group.aks1_backups.name
   location                 = azurerm_resource_group.aks1_backups.location
-  account_kind             = "BlobStorage"
   account_tier             = "Standard"
   account_replication_type = "GRS"
   access_tier              = "Hot"
@@ -25,6 +24,12 @@ resource "azurerm_storage_account" "aks1_backups" {
 
 resource "azurerm_storage_container" "velero" {
   name                  = "velero"
+  storage_account_name  = azurerm_storage_account.aks1_backups.name
+  container_access_type = "private"
+}
+
+resource "azurerm_storage_container" "velerodr" {
+  name                  = "veleroforaksdr"
   storage_account_name  = azurerm_storage_account.aks1_backups.name
   container_access_type = "private"
 }

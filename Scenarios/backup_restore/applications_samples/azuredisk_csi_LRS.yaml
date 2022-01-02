@@ -1,7 +1,7 @@
 apiVersion: storage.k8s.io/v1 
 kind: StorageClass 
 metadata: 
-  name: disk.csi.azure.com 
+  name: mydisk.csi.azure.com 
 provisioner: disk.csi.azure.com 
 parameters: 
   skuname: StandardSSD_LRS 
@@ -57,5 +57,5 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: disk.csi.azure.com
+  storageClassName: mydisk.csi.azure.com
 ---

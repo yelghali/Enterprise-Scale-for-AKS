@@ -43,3 +43,29 @@ module "velero" {
   velero_chart_version    = var.velero_chart_version
   velero_values           = var.velero_values
 }
+
+
+
+#Deploy Velero on target restore cluster, referencing the same RG and storage for backups
+module "veleroaksdr" {
+  depends_on = [azurerm_kubernetes_cluster.aks_dr]
+
+  source = "./modules/velero"
+
+  providers = {
+    kubernetes = kubernetes.aksdr-module
+    helm       = helm.aksdr-module
+  }
+
+  backups_region       = var.backups_region
+  backups_rg_name           = var.backups_rg_name
+  backups_stracc_name           = var.backups_stracc_name
+  backups_stracc_container_name           = "veleroforaksdr"  #todo: put in var
+  aks_nodes_resource_group_name = data.azurerm_kubernetes_cluster.aks_dr.node_resource_group
+  
+  velero_azureidentity_name = "veleroaksdr"
+  velero_namespace        = var.velero_namespace
+  velero_chart_repository = var.velero_chart_repository
+  velero_chart_version    = var.velero_chart_version
+  velero_values           = var.velero_values
+}
