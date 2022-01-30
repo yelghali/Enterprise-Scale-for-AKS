@@ -14,13 +14,13 @@ Velero is a plugin based tool. You can use the following plugins to run Velero o
   - Since v1.4.0 the snapshotter plugin can handle the volumes provisioned by CSI driver `disk.csi.azure.com`
   - IT DOES NOT support Azure File
 
-https://github.com/vmware-tanzu/velero-plugin-for-csi
-- A pluging for snapshotting CSI backed PVCs using the CSI beta snapshot APIs for Kubernetes.
-- It supports Azure Disk `disk.csi.azure.com` and Azure File `file.csi.azure.com`
+ <a href="https://github.com/vmware-tanzu/velero-plugin-for-csi" target="_blank">velero-plugin-for-csi</a>
+  - A pluging for snapshotting CSI backed PVCs using the CSI beta snapshot APIs for Kubernetes.
+  - It supports Azure Disk `disk.csi.azure.com` and Azure File `file.csi.azure.com`
 
-https://velero.io/docs/v1.7/restic/
-- A plugin for backup using filesystem copy (and does not rely on snapshots)
-- It supports Azure Disk and Azure File, with both Kubernetes and CSI drivers.
+  <a href="https://velero.io/docs/v1.7/restic/" target="_blank">restic</a>
+  - A plugin for backup using filesystem copy (and does not rely on snapshots)
+  - It supports Azure Disk and Azure File, with both Kubernetes and CSI drivers.
 
 
  ## Compatibility
