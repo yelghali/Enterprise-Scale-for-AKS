@@ -37,19 +37,30 @@ consider using Premium Managed Disks, which are SSD backed.
 The sample code provides a Terraform module to install & confiugre Velero, to backup an AKS Cluster and restore it to a secondary Region:
 
 
-in the Primary Region (WestEurope in the sample)
+**In the Primary Region (WestEurope in the sample)**
 - Create a source AKS cluster, configured with Availability zones
 - Installs and configures Velero in source cluster **ak1** (Velero referencing backup location in secondary Region)
 
-in the Secondary / Backup Region (NorthEurope)
+**In the Secondary / Backup Region (NorthEurope)**
 - Create a Backup AKS cluster (to restore cluster **aks1**), configured with Availability zones
 - Create a storage location (Azure Storage Account) to store backups 
 - Installs and configures Velero in backup cluster **aks1-dr** (Velero referencing the same backup location in secondary Region)
 
 
+**Steps to deploy!**
 
 * Connect to your Azure Cloud Shell on the Portal:
-![Architectural diagram for the secure baseline scenario.](./media/AKS-private-cluster-scenario.jpg)
+![Azure Cloud Shell screenshot](./media/azure_cloud_shell.png)
+
+* Clone the AKS Accelerator repository: 
+```bash
+git clone https://github.com/Azure/AKS-Landing-Zone-Accelerator.git
+```
+
+* Go to the BAckup & Restore directory:
+```bash
+cd Scenarios/backup_restore/velero_terraform_sample
+```
 
 * Create the Service Principal, representing Velero, to perform backups & restores:
 
@@ -60,12 +71,13 @@ az ad sp create-for-rbac --name sp-velero-aks1 --role Reader
 * Deploy the Terraform sample code:
 
 ```bash
-cd velero_terraform_sample
-
 terraform init
 terraform plan
 terraform apply
 ```
+
+* Check that the install is successfull:
+![Velero check install screenshot](./media/velero_install_check.png)
 
 
 
