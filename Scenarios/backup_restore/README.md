@@ -20,7 +20,8 @@ This repository contains these plugins to support running Velero on Microsoft Az
 
 ## See it in action (it takes 5 minutes) !
 
-The sample code provides a Terraform module to install & confiugre Velero, to backup an AKS Cluster and restore it to a secondary Region:
+The sample code provides a Terraform module to install & confiugre Velero.
+The sample scenario show how to backup a primary AKS Cluster and restore it to a backup / secondary cluster, in a secondary Region:
 
 
 **In the Primary Region (WestEurope in the sample)**
@@ -28,8 +29,8 @@ The sample code provides a Terraform module to install & confiugre Velero, to ba
 - Installs and configures Velero in source cluster **example-aks1** (Velero referencing backup location in secondary Region)
 
 **In the Secondary / Backup Region (NorthEurope)**
-- Create a Backup AKS cluster (to restore cluster **example-aks1-dr**), configured with Availability zones
-- Create a storage location (Azure Storage Account) to store backups 
+- Creates a Backup AKS cluster (to restore cluster **example-aks1-dr**), configured with Availability zones
+- Creates a storage location (Azure Storage Account) to store backups 
 - Installs and configures Velero in backup cluster **example-aks1-dr** (Velero referencing the same backup location in secondary Region)
 
 
