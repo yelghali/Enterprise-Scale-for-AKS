@@ -76,7 +76,7 @@ terraform plan
 terraform apply
 ```
 
-* Check that the install is successfull:
+* Check that the install is successfull: You should see a first backup performed upon deployment using the sample code:
 ![Velero check install screenshot](./media/velero_install_check.png)
 
 
