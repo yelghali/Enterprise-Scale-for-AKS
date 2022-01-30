@@ -29,11 +29,13 @@ Below is a listing of plugin versions and respective Velero versions that are co
 |----------------------------------|---------|-------------------------|---------------|           
 | v1.4.x                           | v1.8.x  |        N/A              |  1.16-latest  |
 | v1.3.x                           | v1.7.x  |       v0.2.0            |  1.12-latest  |
-| v1.2.x                           | v1.6.x  |       v0.1.2            |  1.12-1.21  |
-| v1.1.x                           | v1.5.x  |       v0.1.2            |  1.12-1.21  |
-| v1.1.x                           | v1.4.x  |       v0.1.1            |  1.12-1.21  |
+| v1.2.x                           | v1.6.x  |       v0.1.2            |  1.12-1.21    |
+| v1.1.x                           | v1.5.x  |       v0.1.2            |  1.12-1.21    |
+| v1.1.x                           | v1.4.x  |       v0.1.1            |  1.12-1.21    |
 
-
+- https://github.com/vmware-tanzu/velero#velero-compatibility-matrix
+- https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure#compatibility
+- https://github.com/vmware-tanzu/velero-plugin-for-csi#compatibility
 
 
 How to Install Velero on AKS
