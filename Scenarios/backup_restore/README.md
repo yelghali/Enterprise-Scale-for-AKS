@@ -103,6 +103,16 @@ velero backup create manual_backup1 --default-volumes-to-restic -w
   velero restore create restore1 --from-backup manual_backup1 -w
   ```
 
+* Check that Restore is successfull:
+  - Check restored applications / pods
+  ```bash
+  kubectl get pods --all-namespaces
+  ```
+- check restore details 
+  ```bash
+  velero restore describe restore1 --details
+  ```
+
 
 ### Next steps
 
