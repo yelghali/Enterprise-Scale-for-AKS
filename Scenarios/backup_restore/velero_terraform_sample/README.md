@@ -43,6 +43,8 @@ Velero is a plugin based tool. You can use the following plugins to run Velero o
 
 ## Using the module
 
+The modules provides a solution to automate the steps described in the article https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure
+
 ```hcl
 #Deploy Velero on primary cluster AKS1
 module "velero" {
@@ -107,7 +109,7 @@ module "velero" {
 
 
 ## Customizing the module
- You can custumize velero configuration by editing the file <a href="./modules/velero/locals-velero.tf" target="_blank">locals-velero.tf</a>:
+ You can customize velero configuration by editing the file <a href="./modules/velero/locals-velero.tf" target="_blank">locals-velero.tf</a>:
 
 ```hcl
 velero_default_values = {
