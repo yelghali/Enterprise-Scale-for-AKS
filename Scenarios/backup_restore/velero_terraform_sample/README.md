@@ -5,7 +5,8 @@
 
 Velero is a plugin based tool. You can use the following plugins to run Velero on Microsoft Azure:
 
-https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure, which provides:
+<a href="https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure" target="_blank">velero-plugin-for-microsoft-azure</a>, which provides:
+
 - An object store plugin for persisting and retrieving backups on Azure Blob Storage. Content of backup is log files, warning/error files, restore logs.
 
 - A volume snapshotter plugin for creating snapshots from volumes (during a backup) and volumes from snapshots (during a restore) on Azure Managed Disks.
