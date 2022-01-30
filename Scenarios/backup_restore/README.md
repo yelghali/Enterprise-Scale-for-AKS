@@ -87,6 +87,8 @@ terraform apply
  ```bash
 velero backup create manual-backup1 --default-volumes-to-restic -w
   ```
+![Create backup](./media/create_backup.png)
+
 
 * Restore to secondary AKS cluster:
   - Connect to the Secondary / Backup AKS Cluster (following the sample code as is): 
