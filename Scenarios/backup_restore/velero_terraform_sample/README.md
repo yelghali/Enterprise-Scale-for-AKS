@@ -27,7 +27,7 @@ Velero is a plugin based tool. You can use the following plugins to run Velero o
 
   Below is a listing of plugin versions and respective Velero versions that are compatible.
 
-  | velero-plugin-for-microsoft-azure| Velero  |   velero-plugin-for-csi | Kubernetes    |
+  | velero-plugin-for-microsoft-azure| Velero (with restic)  |   velero-plugin-for-csi | Kubernetes    |
   |----------------------------------|---------|-------------------------|---------------|           
   | v1.4.x                           | v1.8.x  |        N/A              |  1.16-latest  |
   | v1.3.x                           | v1.7.x  |       v0.2.0            |  1.12-latest  |
