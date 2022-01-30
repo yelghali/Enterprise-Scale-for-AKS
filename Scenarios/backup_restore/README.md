@@ -1,11 +1,8 @@
 ## Overview
 
-This repository contains these plugins to support running Velero on Microsoft Azure:
+This topic describes how to back up and restore AKS clusters using Velero and Azure Blob as the storage location. Velero is an open-source community standard tool for backing up and restoring Kubernetes cluster objects and persistent volumes, and it supports a variety of storage providers to store its backups.
 
-- An object store plugin for persisting and retrieving backups on Azure Blob Storage. Content of backup is log files, warning/error files, restore logs.
-
-- A volume snapshotter plugin for creating snapshots from volumes (during a backup) and volumes from snapshots (during a restore) on Azure Managed Disks.
-  - Since v1.4.0 the snapshotter plugin can handle the volumes provisioned by CSI driver `disk.csi.azure.com`
+If a workload cluster crashes and fails to recover, you can use a Velero backup to restore its contents and internal API objects to a new cluster.
 
 ## Velero Features
 
@@ -20,8 +17,8 @@ This repository contains these plugins to support running Velero on Microsoft Az
 
 ## See it in action (it takes 5 minutes) !
 
-The sample code provides a Terraform module to install & confiugre Velero.
-The sample scenario show how to backup a primary AKS Cluster and restore it to a backup / secondary cluster, in a secondary Region:
+The sample code provides a [Terraform module](./velero_terraform_sample/modules/velero) to install & confiugre Velero.
+The implemented scenario shows how to backup a primary AKS cluster, and restore it to a seconday cluster (in a secondary region)
 
 
 **In the Primary Region (WestEurope in the sample)**
@@ -105,7 +102,7 @@ velero backup create manual-backup1 --default-volumes-to-restic -w
   ```
   ![Velero check install screenshot](./media/list_backups.png)
   
-  - Restore from backup :
+  - Restore from backup : (you may get a partially failed status when trying to restore existing objects)
   ```bash
   velero restore create restore1 --from-backup manual-backup1 -w
   ```
