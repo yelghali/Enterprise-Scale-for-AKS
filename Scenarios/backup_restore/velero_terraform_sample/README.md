@@ -106,6 +106,61 @@ module "velero" {
   - Installs Velero on the AKS Clusters using the provided module
 
 
+## Customizing the module
+ You can custumize velero configuration by editing the file <a href="./modules/velero/locals-velero.tf" target="_blank">locals-velero.tf</a>:
+
+```hcl
+velero_default_values = {
+    "restoreOnlyMode"                                               = try(var.velero_restore_mode_only, "false")
+    "configuration.backupStorageLocation.bucket"                = try(var.backups_stracc_container_name, "")
+    "configuration.backupStorageLocation.config.resourceGroup"  = try(var.backups_rg_name, "")
+    "configuration.backupStorageLocation.config.storageAccount" = try(var.backups_stracc_name, "")
+    "configuration.backupStorageLocation.name"                  = "default"
+    "configuration.provider"                                    = "azure"
+    "configuration.volumeSnapshotLocation.config.resourceGroup" = try(var.backups_rg_name, "")
+    "configuration.volumeSnapshotLocation.name"                 = "default"
+    "credentials.existingSecret"                                = try(kubernetes_secret.velero.metadata[0].name, "")
+    "credentials.useSecret"                                     = "true"
+
+    # Use restic for filesystembackup
+    "deployRestic"                                              = "true"
+
+    "env.AZURE_CREDENTIALS_FILE"                                = "/credentials"
+    "metrics.enabled"                                           = "true"
+    "rbac.create"                                               = "true"
+
+    # schedule automated backups
+    "schedules.daily.schedule"                                  = "0 23 * * *"
+    "schedules.daily.template.includedNamespaces"               = "{*}"
+    "schedules.daily.template.snapshotVolumes"                  = "true"
+    "schedules.daily.template.ttl"                              = "240h"
+
+    "serviceAccount.server.create"                              = "true"
+    "snapshotsEnabled"                                          = "true"
+
+    "initContainers[0].name"                                    = "velero-plugin-for-azure"
+    "initContainers[0].image"                                   = "velero/velero-plugin-for-microsoft-azure:v1.1.1"
+    "initContainers[0].volumeMounts[0].mountPath"               = "/target"
+    "initContainers[0].volumeMounts[0].name"                    = "plugins"
+
+    # Uncomment to install CSI Driver Plugin
+    #"initContainers[1].name"                                    = "velero-plugin-for-csi"
+    #"initContainers[1].image"                                   = "velero/velero-plugin-for-csi:v0.1.1"
+    #"initContainers[1].volumeMounts[0].mountPath"               = "/target"
+    #"initContainers[1].volumeMounts[0].name"                    = "plugins"
+    #"features"                                                  = "EnableCSI"
+    
+    "image.repository"                                          = "velero/velero"
+    "image.tag"                                                 = "v1.4.0"
+    "image.pullPolicy"                                          = "IfNotPresent"
+    
+    # Uncomment to use Managed identity with velero instead of service principal, does not work with restic (filesystembackup)
+    #"podAnnotations.aadpodidbinding"                            = local.velero_identity_name
+    #"podLabels.aadpodidbinding"                                 = local.velero_identity_name
+  }
+
+
+```
 
 
 
