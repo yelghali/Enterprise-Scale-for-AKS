@@ -14,4 +14,4 @@ If a workload cluster crashes and fails to recover, you can use a Velero backup 
 
 ## How Velero works (High Level Architecture)
 
-![Velero Architecture screenshot](./media/architecture_velero.png)
+![Plan Backup Restore](./media/plan_backup_restore.png)
