@@ -109,7 +109,13 @@ module "velero" {
 
 
 ## Customizing the module
- You can customize velero configuration by editing the file <a href="./modules/velero/locals-velero.tf" target="_blank">locals-velero.tf</a>:
+
+
+You can customize velero configuration by editing the file <a href="./modules/velero/locals-velero.tf" target="_blank">locals-velero.tf</a>:
+
+You can see the supported Velero values: https://github.com/vmware-tanzu/helm-charts/blob/main/charts/velero/values.yaml
+ 
+ 
 
 ```hcl
 velero_default_values = {
