@@ -79,7 +79,15 @@ terraform apply
 * Check that the install is successfull: 
   - First install Velero client (CLI) to interact with Velero Server (Pod deployed on AKS cluster): https://velero.io/docs/v1.7/basic-install/#install-the-cli
 
+  - Connect to the Primary AKS Cluster (following the sample code as is): 
+  ```bash
+  az aks get-credentials --name example-aks1 --overwrite-existing --resource-group testvelero
+  ```
+
   - You should see a first backup performed upon deployment using the sample code:
+  ```bash
+  velero backup get
+  ```
 ![Velero check install screenshot](./media/velero_install_check.png)
 
 
