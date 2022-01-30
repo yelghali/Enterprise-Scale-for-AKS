@@ -9,7 +9,7 @@ AKS Configuration:
 * Use multiple node pools & nodes spanning AZs
 * Configure resource requests and limits
 * Configure Taints & Tolerations, Pod Affinity
-* Scheduling workloads with AZs
+* Scheduling workloads with AZs, see the article: https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-advanced-scheduler
   - to ensure pod replicas are spread evenly across zones : Use Pod Topology Aware Scheduling 
   - to ensure the PVs are located in the same zone as the pods:
      - Use Volume Binding Mode: WaitForFirstConsumer
