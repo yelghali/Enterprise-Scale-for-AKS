@@ -3,17 +3,25 @@
 ![Plan Backup Restore](./media/plan_backup_restore.png)
 
 ## High Availability Considerations
-Cluster Infrastructure:
+AKS Configuration:
 * Enable Uptime SLA for production workloads
-* Use Availability Zones
+* Use Availability Zones (with Standard Load Balancer)
 * Use multiple node pools & nodes spanning AZs
-* Configure Taints & Tolerations , Pod Affinity
-* Use Toplogy Aware scheduling (optimally route traffic within the same zone to avoid latency)
-* Use Virtual Nodes to quicly span new containers
+* Configure resource requests and limits
+* Configure Taints & Tolerations, Pod Affinity
+* Scheduling workloads with AZs
+  - to ensure pod replicas are spread evenly across zones : Use Pod Topology Aware Scheduling 
+  - to ensure the PVs are located in the same zone as the pods:
+     - Use Volume Binding Mode: WaitForFirstConsumer
+     - Use StatefulSets
+     - Use Zone-Redundant (ZRS) Disks (preview)
+   - to optimally route traffic within the same zone to avoid unnecessary latency: 
+      - Use Service Topology (deprecated in Kubernetes 1.21, +, feature state alpha)
+      - Use Topology Aware Hints (from Kubernetes 1.21+, feature state alpha)
 
-* TODO: example / best practice for Taints & Tolerations using AZs
 
-for storage sources (Storage Class Configuration)
+for Storage Class Configuration
+* Use CSI Driver as it is the standard provider for exposing storage to applications running on Kubernetes
 * Use Azure Disk with ZRS (currently in Preview) --> available via Azure Disk CSI Driver
 * Use Azure File with ZRS
 
