@@ -15,7 +15,7 @@ This repository contains these plugins to support running Velero on Microsoft Az
 
 ## How Velero works (High Level Architecture)
 
-![Velero Architecture screenshot](./media/velero_architecture.png)
+![Velero Architecture screenshot](./media/architecture_velero.png)
 
 
 ## See it in action (it takes 5 minutes) !
