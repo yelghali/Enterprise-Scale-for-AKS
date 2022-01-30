@@ -81,7 +81,7 @@ terraform apply
   ```bash
   kubectl get pods -n velero
   ```
-   ![Velero check pods screenshot](./media/check_velero_pods.png)
+   ![Velero check pods screenshot](./media/velero_check_pods.png)
   
   - You should see a first backup performed upon deployment using the sample code:
   ```bash
