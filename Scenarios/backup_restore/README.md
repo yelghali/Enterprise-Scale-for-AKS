@@ -76,6 +76,13 @@ terraform apply
   ```bash
   az aks get-credentials --name example-aks1 --overwrite-existing --resource-group testvelero
   ```
+  
+   - Check that velero is installed and runningcorrectly: 
+  ```bash
+  kubectl get pods -n velero
+  ```
+   ![Velero check pods screenshot](./media/check_velero_pods.png)
+  
   - You should see a first backup performed upon deployment using the sample code:
   ```bash
   velero backup get
