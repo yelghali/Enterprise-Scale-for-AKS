@@ -140,7 +140,7 @@ velero backup create manual-backup1 --default-volumes-to-restic -w
 
 ### Next steps
 
-:arrow_forward: [Plan your AKS Backup & Restore for Disaster Recovery](./Scenarios/Secure-Baseline)
+:arrow_forward: [Plan your AKS Backup & Restore for Disaster Recovery](./plan_backup_restore.md)
 
 :arrow_forward: [Deep Dive on Velero configuration for AKS](./velero_terraform_sample)
 
