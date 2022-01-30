@@ -25,26 +25,13 @@ https://velero.io/docs/v1.7/restic/
 
 Below is a listing of plugin versions and respective Velero versions that are compatible.
 
-| Plugin Version  | Velero Version |
-|-----------------|----------------|
-| v1.4.x          | v1.8.x         |
-| v1.3.x          | v1.7.x         |
-| v1.2.x          | v1.6.x         |
-| v1.1.x          | v1.5.x         |
-| v1.1.x          | v1.4.x         |
-| v1.0.x          | v1.3.x         |
-| v1.0.x          | v1.2.0         |
-
-
-
-
-
-
-
-
-
-
-
+| velero-plugin-for-microsoft-azure| Velero  |   velero-plugin-for-csi | Kubernetes    |
+|----------------------------------|---------|-------------------------|---------------|           
+| v1.4.x                           | v1.8.x  |        N/A              |  1.16-latest  |
+| v1.3.x                           | v1.7.x  |       v0.2.0            |  1.12-latest  |
+| v1.2.x                           | v1.6.x  |       v0.1.2            |  1.12-latest  |
+| v1.1.x                           | v1.5.x  |       v0.1.2            |  1.12-latest  |
+| v1.1.x                           | v1.4.x  |       v0.1.1            |  1.12-latest  |
 
 
 
