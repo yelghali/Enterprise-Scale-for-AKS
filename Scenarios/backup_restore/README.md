@@ -73,7 +73,9 @@ terraform apply
   ```bash
   velero backup get
   ```
-![Velero check install screenshot](./media/velero_check_install.png)
+  ![Velero check install screenshot](./media/velero_check_install.png)
+  
+  
 
 * Deploy sample statefull applications:
 
@@ -100,6 +102,8 @@ velero backup create manual-backup1 --default-volumes-to-restic -w
   ```bash
   velero backup get
   ```
+  ![Velero check install screenshot](./media/list_backups.png)
+  
   - Restore from backup :
   ```bash
   velero restore create restore1 --from-backup manual-backup1 -w
