@@ -1,3 +1,54 @@
+
+# Velero configuration for Microsoft Azure
+
+## Overview
+
+Velero is a plugin based tool. You can use the following plugins to run Velero on Microsoft Azure:
+
+https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure, which provides:
+- An object store plugin for persisting and retrieving backups on Azure Blob Storage. Content of backup is log files, warning/error files, restore logs.
+
+- A volume snapshotter plugin for creating snapshots from volumes (during a backup) and volumes from snapshots (during a restore) on Azure Managed Disks.
+  - It supports Azure Disk provisioned by Kubernetes driver `kubernetes.io/azure-disk`
+  - Since v1.4.0 the snapshotter plugin can handle the volumes provisioned by CSI driver `disk.csi.azure.com`
+  - IT DOES NOT support Azure File
+
+https://github.com/vmware-tanzu/velero-plugin-for-csi
+- A pluging for snapshotting CSI backed PVCs using the CSI beta snapshot APIs for Kubernetes.
+- It supports Azure Disk `disk.csi.azure.com` and Azure File `file.csi.azure.com`
+
+https://velero.io/docs/v1.7/restic/
+- A plugin for backup using filesystem copy
+- It supports Azure Disk and Azure File, with both Kubernetes and CSI drivers.
+
+## Compatibility
+
+Below is a listing of plugin versions and respective Velero versions that are compatible.
+
+| Plugin Version  | Velero Version |
+|-----------------|----------------|
+| v1.4.x          | v1.8.x         |
+| v1.3.x          | v1.7.x         |
+| v1.2.x          | v1.6.x         |
+| v1.1.x          | v1.5.x         |
+| v1.1.x          | v1.4.x         |
+| v1.0.x          | v1.3.x         |
+| v1.0.x          | v1.2.0         |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 How to Install Velero on AKS
 
 
