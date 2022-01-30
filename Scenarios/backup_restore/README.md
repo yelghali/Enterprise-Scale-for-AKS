@@ -17,7 +17,7 @@ If a workload cluster crashes and fails to recover, you can use a Velero backup 
 ![Velero Architecture screenshot](./media/architecture_velero.png)
 
 
-## See it in action (it takes 5 minutes) !
+## See it in action (it takes 8 minutes) !
 
 The sample code provides a [Terraform module](./velero_terraform_sample/modules/velero) to install & confiugre Velero.
 
