@@ -39,7 +39,7 @@ The sample code provides a Terraform module to install & confiugre Velero, to ba
 
 **In the Primary Region (WestEurope in the sample)**
 - Create a source AKS cluster, configured with Availability zones
-- Installs and configures Velero in source cluster **ak1** (Velero referencing backup location in secondary Region)
+- Installs and configures Velero in source cluster **aks1** (Velero referencing backup location in secondary Region)
 
 **In the Secondary / Backup Region (NorthEurope)**
 - Create a Backup AKS cluster (to restore cluster **aks1**), configured with Availability zones
@@ -76,7 +76,10 @@ terraform plan
 terraform apply
 ```
 
-* Check that the install is successfull: You should see a first backup performed upon deployment using the sample code:
+* Check that the install is successfull: 
+  - First install Velero client (CLI) to interact with Velero Server (Pod deployed on AKS cluster): https://velero.io/docs/v1.7/basic-install/#install-the-cli
+
+  - You should see a first backup performed upon deployment using the sample code:
 ![Velero check install screenshot](./media/velero_install_check.png)
 
 
