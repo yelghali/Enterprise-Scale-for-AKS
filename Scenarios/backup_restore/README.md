@@ -63,10 +63,12 @@ terraform apply
 
 * Check that the install is successfull: 
   - First install Velero client (CLI) to interact with Velero Server (Pod deployed on AKS cluster): https://velero.io/docs/v1.7/basic-install/#install-the-cli
+
     If you are using Azure Cloud Shell, you cannot run "sudo" commands. Instead, you can download velero binary and use an alias to reference it
      ```bash
      alias velero=/home/path-to-velero-client-binary
     ``` 
+
 
   - Connect to the Primary AKS Cluster (following the sample code as is): 
   ```bash
