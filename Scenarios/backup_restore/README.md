@@ -116,13 +116,13 @@ velero backup create manual-backup1 --default-volumes-to-restic -w
   ```bash
   velero backup get
   ```
-  ![Velero check install screenshot](./media/list_backups.png)
+   ![Velero check install screenshot](./media/list_backups.png)
   
   - Restore from backup : (you may get a partially failed status when trying to restore existing objects)
   ```bash
   velero restore create restore1 --from-backup manual-backup1 -w
   ```
- ![Create Restore](./media/create_restore.png)
+   ![Create Restore](./media/create_restore.png)
 
 * Check that Restore is successfull:
   - Check restored applications / pods
