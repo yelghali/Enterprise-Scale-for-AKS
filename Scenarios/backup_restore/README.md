@@ -85,7 +85,7 @@ terraform apply
 * Create a backup for primary AKS cluster:
 
  ```bash
-velero backup create manual_backup1 --default-volumes-to-restic -w
+velero backup create manual-backup1 --default-volumes-to-restic -w
   ```
 
 * Restore to secondary AKS cluster:
@@ -100,7 +100,7 @@ velero backup create manual_backup1 --default-volumes-to-restic -w
   ```
   - Restore from backup :
   ```bash
-  velero restore create restore1 --from-backup manual_backup1 -w
+  velero restore create restore1 --from-backup manual-backup1 -w
   ```
 
 * Check that Restore is successfull:
