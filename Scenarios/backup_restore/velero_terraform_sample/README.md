@@ -41,7 +41,7 @@ Velero is a plugin based tool. You can use the following plugins to run Velero o
 
 
 
-## Usage
+## Using the module
 
 ```hcl
 #Deploy Velero on primary cluster AKS1
@@ -75,6 +75,30 @@ module "velero" {
 }
 
 ```
+
+ ## Understanding the sample code
+
+ <a href="./01-aks1.tf" target="_blank">01-aks1.tf</a>:
+  - Creates a Resource Group in Primary Region
+  - Creates an AKS Cluster (used as primary)
+
+
+ <a href="./02-aks-dr.tf" target="_blank">02-aks-dr.tf</a>:
+  - Creates a Resource Group in Secondary Region
+  - Creates an AKS Cluster (used as secondary, to restore backup)
+
+ <a href="./03-backup-location.tf" target="_blank">03-backup-location.tf</a>:
+  - Creates a Resource Group in Secondary Region, for hosting storage location (to store backups and configuration)
+  - Creates a storage account 
+  - Creates a storage container, used by velero (Optionnaly, you could create a secondary container, to backup to backup cluster)
+
+
+ <a href="./main.tf" target="_blank">maint.tf</a>:
+  - References the created ressources: primary and secondary RGs + AKS clusters + storage account (you should be able to reuse it for your existing resources)
+  - Creates RBACs for Velero Service Principal. See this <a href="https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure#set-permissions-for-velero" target="_blank">article</a> for defining minium permissions.  
+  - Installs Velero on the AKS Clusters using the provided module
+
+
 
 
 
