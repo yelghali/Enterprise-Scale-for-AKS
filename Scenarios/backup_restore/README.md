@@ -17,18 +17,19 @@ If a workload cluster crashes and fails to recover, you can use a Velero backup 
 
 ## See it in action (it takes 5 minutes) !
 
-The sample code provides a [Terraform module](./velero_terraform_sample/modules/velero) to install & confiugre Velero.
 The implemented scenario shows how to backup a primary AKS cluster, and restore it to a seconday cluster (in a secondary region)
+The sample code provides a [Terraform module](./velero_terraform_sample/modules/velero) to install & confiugre Velero.
+
 
 
 **In the Primary Region (WestEurope in the sample)**
-- Creates a source AKS cluster named **example-aks1**, configured with Availability zones
-- Installs and configures Velero in source cluster **example-aks1** (Velero referencing backup location in secondary Region)
+- Creates a primary AKS cluster named **example-aks1**, configured with Availability zones
+- Installs and configures Velero in primary cluster **example-aks1** (referencing backup location in secondary Region)
 
 **In the Secondary / Backup Region (NorthEurope)**
-- Creates a Backup AKS cluster (to restore cluster **example-aks1-dr**), configured with Availability zones
+- Creates a secondary AKS cluster named **example-aks1-dr**, configured with Availability zones
 - Creates a storage location (Azure Storage Account) to store backups 
-- Installs and configures Velero in backup cluster **example-aks1-dr** (Velero referencing the same backup location in secondary Region)
+- Installs and configures Velero in secondary cluster **example-aks1-dr** (Velero referencing the same backup location in secondary Region)
 
 
 **Steps to deploy!**
