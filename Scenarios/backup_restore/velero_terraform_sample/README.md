@@ -21,40 +21,90 @@ https://velero.io/docs/v1.7/restic/
 - A plugin for backup using filesystem copy (and does not rely on snapshots)
 - It supports Azure Disk and Azure File, with both Kubernetes and CSI drivers.
 
-## Compatibility
 
-Below is a listing of plugin versions and respective Velero versions that are compatible.
+ ## Compatibility
 
-| velero-plugin-for-microsoft-azure| Velero  |   velero-plugin-for-csi | Kubernetes    |
-|----------------------------------|---------|-------------------------|---------------|           
-| v1.4.x                           | v1.8.x  |        N/A              |  1.16-latest  |
-| v1.3.x                           | v1.7.x  |       v0.2.0            |  1.12-latest  |
-| v1.2.x                           | v1.6.x  |       v0.1.2            |  1.12-1.21    |
-| v1.1.x                           | v1.5.x  |       v0.1.2            |  1.12-1.21    |
-| v1.1.x                           | v1.4.x  |       v0.1.1            |  1.12-1.21    |
+  Below is a listing of plugin versions and respective Velero versions that are compatible.
 
-- https://github.com/vmware-tanzu/velero#velero-compatibility-matrix
-- https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure#compatibility
-- https://github.com/vmware-tanzu/velero-plugin-for-csi#compatibility
+  | velero-plugin-for-microsoft-azure| Velero  |   velero-plugin-for-csi | Kubernetes    |
+  |----------------------------------|---------|-------------------------|---------------|           
+  | v1.4.x                           | v1.8.x  |        N/A              |  1.16-latest  |
+  | v1.3.x                           | v1.7.x  |       v0.2.0            |  1.12-latest  |
+  | v1.2.x                           | v1.6.x  |       v0.1.2            |  1.12-1.21    |
+  | v1.1.x                           | v1.5.x  |       v0.1.2            |  1.12-1.21    |
+  | v1.1.x                           | v1.4.x  |       v0.1.1            |  1.12-1.21    |
 
-
-How to Install Velero on AKS
+  - https://github.com/vmware-tanzu/velero#velero-compatibility-matrix
+  - https://github.com/vmware-tanzu/velero-plugin-for-microsoft-azure#compatibility
+  - https://github.com/vmware-tanzu/velero-plugin-for-csi#compatibility
 
 
-How to use velero to backup/restore Applications on AKS
+
+## Usage
+
+```hcl
+#Deploy Velero on source cluster AKS1
+module "velero" {
+  depends_on = [azurerm_kubernetes_cluster.aks]
+
+  source = "./modules/velero"
+
+  providers = {
+    kubernetes = kubernetes.aks-module
+    helm       = helm.aks-module
+  }
+
+  backups_region       = var.backups_region
+  backups_rg_name           = var.backups_rg_name
+  backups_stracc_name           = var.backups_stracc_name
+  backups_stracc_container_name           = var.backups_stracc_container_name
+  aks_nodes_resource_group_name = data.azurerm_kubernetes_cluster.aks.node_resource_group
+  
+  velero_azureidentity_name = "veleroaks1"
+  velero_namespace        = var.velero_namespace
+  velero_chart_repository = var.velero_chart_repository
+  velero_chart_version    = var.velero_chart_version
+  velero_values           = var.velero_values
+  velero_restore_mode_only           = "false" #default value
 
 
-What does the example provide:
-* deploy sample AKS with POD Managed Identity + Network driver Azure CNI
-* deploy ressource group + storage account for storing backups
-* Configure AKS cluster with Velero server side resources and integrate with Storage location
+  velero_sp_tenantID = data.azurerm_client_config.current.tenant_id 
+  velero_sp_clientID = data.azuread_service_principal.velero_sp.application_id 
+  velero_sp_clientSecret = azuread_service_principal_password.velero_sp_password.value 
+}
+
+```
 
 
-How to deploy from Azure Integrated console on your subscription: (folder velero_terraform_sample)
-* az ad sp create-for-rbac --name sp-velero-backup --role Reader
-* terraform init 
-* terraform plan
-* terraform apply
+
+
+
+
+
+
+
+
+
+
+
+
+  How to Install Velero on AKS
+
+
+  How to use velero to backup/restore Applications on AKS
+
+
+  What does the example provide:
+  * deploy sample AKS with POD Managed Identity + Network driver Azure CNI
+  * deploy ressource group + storage account for storing backups
+  * Configure AKS cluster with Velero server side resources and integrate with Storage location
+
+
+  How to deploy from Azure Integrated console on your subscription: (folder velero_terraform_sample)
+  * az ad sp create-for-rbac --name sp-velero-backup --role Reader
+  * terraform init 
+  * terraform plan
+  * terraform apply
 
 
 
