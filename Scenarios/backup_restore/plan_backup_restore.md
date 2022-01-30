@@ -27,18 +27,29 @@ for Storage Class Configuration
 
 ## Disaster Recovey Considerations
 
-Prepare Identities
 
-Cluster Deployment
+* Prepare Identities
+* Plan network segmentation & DNS resolution
+* Prepare storage location in DR Region to store backups
+* for AKS configuration: 
+  * Prepare Storage classes & snapshot classes (naming, sku, topology aware configuration, binding mode)
 
-Node Pool Configuration
-** Create Nodes & re-deploy Node Configuration
-** Use Node Configuration Snapshot (currently in Preview)
+* Node Pool Configuration
+  * Create Nodes & re-deploy Node Configuration
+  * Use Node Configuration Snapshot (currently in Preview)
+
+
+* Run a Drill Tests:
+	* Create secondary AKS ecosystem (ACR, Keyvault, App Gateway, Firewall, NSG)
+	* Create secondary AKS Cluster (with its dependencies installed: aad-podid, velero, csi-drivers) + RBAC for Azure services for AKS & velero identities
+  * Run velero restore 
+
+
 
 For a **Stateless** Application: 
 *Redeploy Application Configuration 
 
 For a **statefull** Application, you need to backup & Restore:
+** Cluster configuration (storage classes, volumesnapshotclasses, technical pods)
 ** Persistent Volumes (Azure Disk & Azure Fileshare)
-** Cluster configuration (technical pods)
 ** Application Configuration (linked with the restored persistent volumes)
