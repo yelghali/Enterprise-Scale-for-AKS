@@ -7,44 +7,30 @@ This repository contains these plugins to support running Velero on Microsoft Az
 - A volume snapshotter plugin for creating snapshots from volumes (during a backup) and volumes from snapshots (during a restore) on Azure Managed Disks.
   - Since v1.4.0 the snapshotter plugin can handle the volumes provisioned by CSI driver `disk.csi.azure.com`
 
-## Compatibility
+## Velero Features
 
-Below is a listing of plugin versions and respective Velero versions that are compatible.
-
-| Plugin Version  | Velero Version |
-|-----------------|----------------|
-| v1.4.x          | v1.8.x         |
-| v1.3.x          | v1.7.x         |
-| v1.2.x          | v1.6.x         |
-| v1.1.x          | v1.5.x         |
-| v1.1.x          | v1.4.x         |
-| v1.0.x          | v1.3.x         |
-| v1.0.x          | v1.2.0         |
+- Backup & Restore of Kubernetes objects (Cluster configuration)
+- Backup & Restore of persistent volumes
 
 
-## Filing issues
+## How Velero works (High Level Architecture)
 
-If you would like to file a GitHub issue for the plugin, please open the issue on the [core Velero repo][103]
+![Velero Architecture screenshot](./media/velero_architecture.png)
 
 
-## Kubernetes cluster prerequisites
-
-Ensure that the VMs for your agent pool allow Managed Disks. If I/O performance is critical,
-consider using Premium Managed Disks, which are SSD backed.
-
-## See it in action : (it takes 5 minutes !)
+## See it in action (it takes 5 minutes) !
 
 The sample code provides a Terraform module to install & confiugre Velero, to backup an AKS Cluster and restore it to a secondary Region:
 
 
 **In the Primary Region (WestEurope in the sample)**
-- Create a source AKS cluster, configured with Availability zones
-- Installs and configures Velero in source cluster **aks1** (Velero referencing backup location in secondary Region)
+- Creates a source AKS cluster named **example-aks1**, configured with Availability zones
+- Installs and configures Velero in source cluster **example-aks1** (Velero referencing backup location in secondary Region)
 
 **In the Secondary / Backup Region (NorthEurope)**
-- Create a Backup AKS cluster (to restore cluster **aks1**), configured with Availability zones
+- Create a Backup AKS cluster (to restore cluster **example-aks1-dr**), configured with Availability zones
 - Create a storage location (Azure Storage Account) to store backups 
-- Installs and configures Velero in backup cluster **aks1-dr** (Velero referencing the same backup location in secondary Region)
+- Installs and configures Velero in backup cluster **example-aks1-dr** (Velero referencing the same backup location in secondary Region)
 
 
 **Steps to deploy!**
