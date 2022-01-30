@@ -43,7 +43,7 @@ https://velero.io/docs/v1.7/restic/
 ## Usage
 
 ```hcl
-#Deploy Velero on source cluster AKS1
+#Deploy Velero on primary cluster AKS1
 module "velero" {
   depends_on = [azurerm_kubernetes_cluster.aks]
 
