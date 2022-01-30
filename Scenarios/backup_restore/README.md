@@ -36,7 +36,7 @@ The sample code provides a Terraform module to install & confiugre Velero, to ba
 **Steps to deploy!**
 
 * Connect to your Azure Cloud Shell on the Portal:
-![Azure Cloud Shell screenshot](./media/azure_cloud_shell.png)
+![Azure Cloud Shell screenshot](./media/cloud_shell.png)
 
 * Clone the AKS Accelerator repository: 
 ```bash
@@ -73,7 +73,7 @@ terraform apply
   ```bash
   velero backup get
   ```
-![Velero check install screenshot](./media/velero_install_check.png)
+![Velero check install screenshot](./media/velero_check_install.png)
 
 * Deploy sample statefull applications:
 
