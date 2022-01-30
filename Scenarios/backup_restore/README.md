@@ -108,8 +108,11 @@ velero backup create manual_backup1 --default-volumes-to-restic -w
   ```bash
   kubectl get pods --all-namespaces
   ```
-- check restore details 
+  - check restore details 
   ```bash
+  velero restore get restore1
+  ```
+   ```bash
   velero restore describe restore1 --details
   ```
 
