@@ -76,60 +76,12 @@ terraform apply
   ```
 ![Velero check install screenshot](./media/velero_install_check.png)
 
+### Next steps
 
+:arrow_forward: [Plan your AKS Backup & Restore for Disaster Recovery](./Scenarios/Secure-Baseline)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Risk / RPO/RTO based scenarios
-
-
-## See it in action (Deploy the sample code in 5 minutes)!
-
-* Create the Service Principal, representing Velero, to perform backups & restores: 
-
-   **az ad sp create-for-rbac --name sp-velero-aks1 --role Reader**
-
-
-
-## Plan your AKS backup & restore
-
-Prepare Identities
-
-Cluster Deployment
-
-Node Pool Configuration
-** Create Nodes & re-deploy Node Configuration
-** Use Node Configuration Snapshot (currently in Preview)
-
-For a **Stateless** Application: 
-*Redeploy Application Configuration 
-
-For a **statefull** Application, you need to backup & Restore:
-** Persistent Volumes (Azure Disk & Azure Fileshare)
-** Cluster configuration (technical pods)
-** Application Configuration (linked with the restored persistent volumes)
-
-## How Application Backup & Restore Works
-
-## Backup Options for AKS persistent volumes
-
-## AKS Disaster & Recovery 3rd party solutions 
-
-## Practical example with Velero open source solution:
-
+:arrow_forward: [Deep Dive on Velero configuration for AKS](./Scenarios/AKS-Secure-Baseline-PrivateCluster)
 
 ## A future workload for this scenario will include the following 
-* Terraform example of Recovery to Another cluster
+* Deploy Velero as part of the AKS-Secure-Baseline-PrivateCluster
 
