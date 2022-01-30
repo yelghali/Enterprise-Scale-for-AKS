@@ -70,13 +70,23 @@ terraform apply
   az aks get-credentials --name example-aks1 --overwrite-existing --resource-group testvelero
   ```
 
+
+* Deploy sample statefull applications:
+
+ ```bash
+  cd application_samples
+  kubectl apply -f ./
+  ```
+
+
+
   - You should see a first backup performed upon deployment using the sample code:
   ```bash
   velero backup get
   ```
 ![Velero check install screenshot](./media/velero_install_check.png)
 
-  - Connect to the Primary AKS Cluster (following the sample code as is): 
+  - Connect to the Secondary / Backup AKS Cluster (following the sample code as is): 
   ```bash
   az aks get-credentials --name aks-dr --overwrite-existing --resource-group aks-d
   ```
@@ -84,12 +94,6 @@ terraform apply
   - As Velero is configured, in the secondary backup cluster, to reference the same backup location (storage account container), You should see the same backups available :
   ```bash
   velero backup get
-  ```
-
-- Deploy sample statefull applications:
- ```bash
-  cd application_samples
-  kubectl apply -f ./
   ```
 
 ### Next steps
