@@ -78,6 +78,13 @@ module "velero" {
 
  ## Understanding the sample code
 
+ <a href="./providers.tf" target="_blank">providers.tf</a>:
+  - Defines the Terraform providers used to automated the deployment and configuration of resources
+    - azurerm
+    - kubernetes
+    - helm
+
+
  <a href="./01-aks1.tf" target="_blank">01-aks1.tf</a>:
   - Creates a Resource Group in Primary Region
   - Creates an AKS Cluster (used as primary)
