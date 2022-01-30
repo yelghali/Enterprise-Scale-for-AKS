@@ -41,7 +41,7 @@ for Storage Class Configuration
 
 * Run a Drill Tests:
 	* Create secondary AKS ecosystem (ACR, Keyvault, App Gateway, Firewall, NSG)
-	* Create secondary AKS Cluster (with its dependencies installed: aad-podid, velero, csi-drivers) + RBAC for Azure services for AKS & velero identities
+	* Create secondary AKS Cluster (with its dependencies installed: aad-podid, velero, csi-drivers) + RBAC for Azure services for AKS & velero identity (SP)
   * Run velero restore 
 
 
