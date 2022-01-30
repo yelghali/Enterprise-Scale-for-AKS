@@ -18,7 +18,7 @@ https://github.com/vmware-tanzu/velero-plugin-for-csi
 - It supports Azure Disk `disk.csi.azure.com` and Azure File `file.csi.azure.com`
 
 https://velero.io/docs/v1.7/restic/
-- A plugin for backup using filesystem copy
+- A plugin for backup using filesystem copy (and does not rely on snapshots)
 - It supports Azure Disk and Azure File, with both Kubernetes and CSI drivers.
 
 ## Compatibility
