@@ -108,6 +108,7 @@ velero backup create manual-backup1 --default-volumes-to-restic -w
   ```bash
   velero restore create restore1 --from-backup manual-backup1 -w
   ```
+ ![Create Restore](./media/create_restore.png)
 
 * Check that Restore is successfull:
   - Check restored applications / pods
