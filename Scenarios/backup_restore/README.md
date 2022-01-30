@@ -17,11 +17,10 @@ If a workload cluster crashes and fails to recover, you can use a Velero backup 
 
 ## See it in action (it takes 5 minutes) !
 
-The implemented scenario shows how to backup a primary AKS cluster, and restore it to a seconday cluster (in a secondary region).
-
 The sample code provides a [Terraform module](./velero_terraform_sample/modules/velero) to install & confiugre Velero.
 
 
+The implemented scenario using this sample, shows how to backup a primary AKS cluster, and restore it to a seconday cluster (in a secondary region):
 
 **In the Primary Region (WestEurope in the sample)**
 - Creates a primary AKS cluster named **example-aks1**, configured with Availability zones
@@ -43,7 +42,7 @@ The sample code provides a [Terraform module](./velero_terraform_sample/modules/
 git clone https://github.com/Azure/AKS-Landing-Zone-Accelerator.git
 ```
 
-* Go to the BAckup & Restore directory:
+* Go to the Backup & Restore directory:
 ```bash
 cd Scenarios/backup_restore/velero_terraform_sample
 ```
@@ -64,6 +63,10 @@ terraform apply
 
 * Check that the install is successfull: 
   - First install Velero client (CLI) to interact with Velero Server (Pod deployed on AKS cluster): https://velero.io/docs/v1.7/basic-install/#install-the-cli
+    If you are using Azure Cloud Shell, you cannot run "sudo" commands. Instead, you can download velero binary and use an alias to reference it
+     ```bash
+     alias velero=/home/path-to-velero-client-binary
+    ``` 
 
   - Connect to the Primary AKS Cluster (following the sample code as is): 
   ```bash
