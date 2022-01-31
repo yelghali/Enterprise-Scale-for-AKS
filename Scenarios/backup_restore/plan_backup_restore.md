@@ -11,6 +11,7 @@ AKS Configuration:
 * Configure Taints & Tolerations, Pod Affinity
 
 
+
 Compute: Scheduling workloads with AZs, see the article: https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-advanced-scheduler
   - to ensure pod replicas are spread evenly across zones : Use Pod Topology Aware Scheduling 
   - to ensure the PVs are located in the same zone as the pods:
