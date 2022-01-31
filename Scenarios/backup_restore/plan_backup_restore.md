@@ -11,7 +11,7 @@ AKS Configuration:
 * Configure Taints & Tolerations, Pod Affinity
 
 
-Scheduling workloads with AZs, see the article: https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-advanced-scheduler
+Compute: Scheduling workloads with AZs, see the article: https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-advanced-scheduler
   - to ensure pod replicas are spread evenly across zones : Use Pod Topology Aware Scheduling 
   - to ensure the PVs are located in the same zone as the pods:
      - Use Volume Binding Mode: WaitForFirstConsumer
@@ -22,7 +22,7 @@ Scheduling workloads with AZs, see the article: https://docs.microsoft.com/en-us
       - Use Topology Aware Hints (from Kubernetes 1.21+, feature state alpha)
 
 
-for Storage Class Configuration (for dynamic peristent volumes)
+Data: for Storage Class Configuration (used to create dynamic peristent volumes)
 * Use CSI Driver as it is the standard provider for exposing storage to applications running on Kubernetes
 * Use Azure Disk with ZRS (currently in Preview) --> available via Azure Disk CSI Driver
 * Use Azure File with ZRS
