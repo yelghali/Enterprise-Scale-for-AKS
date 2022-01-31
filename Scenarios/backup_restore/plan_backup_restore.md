@@ -8,7 +8,7 @@ AKS Configuration:
 * Use Availability Zones (with Standard Load Balancer)
 * Use multiple node pools & nodes spanning AZs
 * Configure resource requests and limits
-* Configure Taints & Tolerations, Pod Affinity
+* Configure Taints & Tolerations, Node & Pod Affinity
 
 
 
