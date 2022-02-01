@@ -93,9 +93,37 @@ terraform apply
 
 * Deploy sample statefull applications:
 
- ```bash
-  kubectl apply -f ../application_samples/
+   ```bash
+    kubectl apply -f ../application_samples/
   ```
+
+   - Wait for applications to be running, and then create some data files (to test backups and restores):
+  ```bash
+    kubectl exec -it nginx-csi-disk-zrs -n csi-disk-zrs -- touch /mnt/azuredisk/some-data-file.txt
+
+    kubectl exec -it nginx-csi-disk-lrs -n csi-disk-lrs -- touch /mnt/azuredisk/some-data-file.txt
+
+    kubectl exec -it nginx-csi-file-zrs -n csi-file-zrs -- touch /mnt/azuredisk/some-data-file.txt
+
+    kubectl exec -it nginx-file-lrs -n file-lrs -- touch /mnt/azuredisk/some-data-file.txt
+
+    kubectl exec -it nginxstatefulset-0 -n diskstatefulset -- touch /mnt/azuredisk/some-data-file.txt
+  ```
+
+     - Chek that data is created :
+  ```bash
+    kubectl exec -it nginx-csi-disk-zrs -n csi-disk-zrs -- ls /mnt/azuredisk/some-data-file.txt
+
+    kubectl exec -it nginx-csi-disk-lrs -n csi-disk-lrs -- ls /mnt/azuredisk/some-data-file.txt
+
+    kubectl exec -it nginx-csi-file-zrs -n csi-file-zrs -- ls /mnt/azuredisk/some-data-file.txt
+
+    kubectl exec -it nginx-file-lrs -n file-lrs -- ls /mnt/azuredisk/some-data-file.txt
+
+    kubectl exec -it nginxstatefulset-0 -n diskstatefulset -- ls /mnt/azuredisk/some-data-file.txt
+  ```
+  
+  
 
 * Create a backup for primary AKS cluster:
 
@@ -147,6 +175,27 @@ velero backup describe manual-backup1 --details
   velero restore describe restore1 --details
   ```
 
+  - Chek new restored pods / applications:
+  ```bash
+  kubectl get pods --all-namespaces
+  ```
+  
+   - Chek that data is restored (check existance of data files):
+  ```bash
+    kubectl exec -it nginx-csi-disk-zrs -n csi-disk-zrs -- ls /mnt/azuredisk/some-data-file.txt
+
+    kubectl exec -it nginx-csi-disk-lrs -n csi-disk-lrs -- ls /mnt/azuredisk/some-data-file.txt
+
+    kubectl exec -it nginx-csi-file-zrs -n csi-file-zrs -- ls /mnt/azuredisk/some-data-file.txt
+
+    kubectl exec -it nginx-file-lrs -n file-lrs -- ls /mnt/azuredisk/some-data-file.txt
+
+    kubectl exec -it nginxstatefulset-0 -n diskstatefulset -- ls /mnt/azuredisk/some-data-file.txt
+  ```
+  
+  ![Ceck Restore](./media/check_restore.png)
+  
+  
 
 ### Next steps
 
