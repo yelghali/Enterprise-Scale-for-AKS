@@ -17,7 +17,7 @@ If a workload cluster crashes and fails to recover, you can use a Velero backup 
 ![Velero Architecture screenshot](./media/architecture_velero.png)
 
 
-## See it in action (it takes 8 minutes) !
+## See it in action (it takes 15 minutes) !
 
 The sample code provides a [Terraform module](./velero_terraform_sample/modules/velero) to install & confiugre Velero.
 
@@ -25,13 +25,13 @@ The sample code provides a [Terraform module](./velero_terraform_sample/modules/
 The implemented scenario using this sample, shows how to backup a primary AKS cluster, and restore it to a seconday cluster (in a secondary region):
 
 **In the Primary Region (WestEurope in the sample)**
-- Creates a primary AKS cluster named **example-aks1**, configured with Availability zones
-- Installs and configures Velero in primary cluster **example-aks1** (referencing backup location in secondary Region)
+- Creates a primary AKS cluster named **primary-aks1**, configured with Availability zones
+- Installs and configures Velero in primary cluster **primary-aks1** (referencing backup location in secondary Region)
 
 **In the Secondary / Backup Region (NorthEurope)**
-- Creates a secondary AKS cluster named **example-aks1-dr**, configured with Availability zones
+- Creates a secondary AKS cluster named **aks-dr**, configured with Availability zones
 - Creates a storage location (Azure Storage Account) to store backups 
-- Installs and configures Velero in secondary cluster **example-aks1-dr** (Velero referencing the same backup location in secondary Region)
+- Installs and configures Velero in secondary cluster **aks-dr** (Velero referencing the same backup location in secondary Region)
 
 
 **Steps to deploy!**
@@ -46,7 +46,7 @@ git clone https://github.com/Azure/AKS-Landing-Zone-Accelerator.git
 
 * Go to the Backup & Restore directory:
 ```bash
-cd Scenarios/backup_restore/velero_terraform_sample
+cd AKS-Landing-Zone-Accelerator/Scenarios/backup_restore/velero_terraform_sample
 ```
 
 * Create the Service Principal, representing Velero, to perform backups & restores:
@@ -74,7 +74,7 @@ terraform apply
 
   - Connect to the Primary AKS Cluster (following the sample code as is): 
   ```bash
-  az aks get-credentials --name example-aks1 --overwrite-existing --resource-group testvelero
+     az aks get-credentials --name primary-aks1 --overwrite-existing --resource-group primary-aks1
   ```
   
    - Check that velero is installed and runningcorrectly: 
@@ -94,22 +94,32 @@ terraform apply
 * Deploy sample statefull applications:
 
  ```bash
-  cd application_samples
-  kubectl apply -f ./
+  kubectl apply -f ../application_samples/
   ```
 
 * Create a backup for primary AKS cluster:
 
  ```bash
-velero backup create manual-backup1 --default-volumes-to-restic -w
+velero backup create manual-backup1  -w
   ```
 ![Create backup](./media/create_backup.png)
+
+* Describe created backup:
+
+ ```bash
+velero backup describe manual-backup1 --details
+  ```
 
 
 * Restore to secondary AKS cluster:
   - Connect to the Secondary / Backup AKS Cluster (following the sample code as is): 
   ```bash
   az aks get-credentials --name aks-dr --overwrite-existing --resource-group aks-dr
+  ```
+
+  - Chek running pods :
+  ```bash
+  kubectl get pods --all-namespaces
   ```
 
   - As Velero is configured, in the secondary backup cluster, to reference the same backup location (storage account container), You should see the same backups available :
@@ -144,6 +154,7 @@ velero backup create manual-backup1 --default-volumes-to-restic -w
 
 :arrow_forward: [Deep Dive on Velero configuration for AKS](./velero_terraform_sample)
 
-## A future workload for this scenario will include the following 
+## Comming Soon !
+* Snapshot based Backups using Velero CSI Plugin 
 * Deploy Velero as part of the AKS-Secure-Baseline-PrivateCluster
 
