@@ -91,7 +91,7 @@ terraform apply
   
   
 
-* Deploy sample statefull applications:
+* Deploy [sample statefull applications](./applications_samples/):
 
    ```bash
     kubectl apply -f ../application_samples/
