@@ -19,7 +19,7 @@ Velero is a plugin based tool. You can use the following plugins to run Velero o
   - It supports Azure Disk `disk.csi.azure.com` and Azure File `file.csi.azure.com`
 
   <a href="https://velero.io/docs/v1.7/restic/" target="_blank">restic</a>
-  - A plugin for backup using filesystem copy (and does not rely on snapshots)
+  - A plugin for backup using file copy (or called block to block copy, which does not rely on snapshots)
   - It supports Azure Disk and Azure File, with both Kubernetes and CSI drivers.
 
 
