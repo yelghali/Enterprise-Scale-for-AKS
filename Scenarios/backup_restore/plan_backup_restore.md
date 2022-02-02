@@ -3,7 +3,7 @@
 ![Plan Backup Restore](./media/plan_backup_restore.png)
 
 ## High Availability Considerations
-**AKS Cluster Configuration**:
+* **AKS Cluster Configuration**:
 * Enable Uptime SLA for production workloads
 * Use Availability Zones (with Standard Load Balancer)
 * Use multiple node pools & nodes spanning AZs
@@ -12,7 +12,7 @@
 
 
 
-**Applications**: 
+* **Applications**: 
 Scheduling workloads with AZs, see the article: https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-advanced-scheduler
   - to ensure pod replicas are spread evenly across zones : Use Pod Topology Aware Scheduling 
   - to ensure the PVs are located in the same zone as the pods:
@@ -24,7 +24,7 @@ Scheduling workloads with AZs, see the article: https://docs.microsoft.com/en-us
       - Use Topology Aware Hints (from Kubernetes 1.21+, feature state alpha)
 
 
-**Data**: 
+* **Data**: 
 Storage Class Configuration (used to create dynamic peristent volumes)
 * Use CSI Driver as it is the standard provider for exposing storage to applications running on Kubernetes
 * Use Azure Disk with ZRS (currently in Preview) --> available via Azure Disk CSI Driver
