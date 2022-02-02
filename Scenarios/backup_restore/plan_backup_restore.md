@@ -45,14 +45,13 @@ Data: for Storage Class Configuration (used to create dynamic peristent volumes)
 * Run a Drill Tests:
 	* Create secondary AKS ecosystem (ACR, Keyvault, App Gateway, Firewall, NSG)
 	* Create secondary AKS Cluster (with its dependencies installed: aad-podid, velero, csi-drivers) + RBAC for Azure services for AKS & velero identity (SP)
-  * Run velero restore 
+
+	To restore **Stateless** Application: 
+	* Redeploy Application Configuration using Devops CICD
+
+	To restore **statefull** Application, you need to backup and restore:
+	* Cluster configuration (storage classes, volumesnapshotclasses, technical pods)
+	*  Persistent Volumes (Azure Disk & Azure Fileshare)
+	*  Application Configuration (linked with the restored persistent volumes)
 
 
-
-For a **Stateless** Application: 
-*Redeploy Application Configuration 
-
-For a **statefull** Application, you need to backup & Restore:
-** Cluster configuration (storage classes, volumesnapshotclasses, technical pods)
-** Persistent Volumes (Azure Disk & Azure Fileshare)
-** Application Configuration (linked with the restored persistent volumes)
