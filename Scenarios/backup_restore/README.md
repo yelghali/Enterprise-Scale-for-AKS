@@ -46,7 +46,7 @@ git clone https://github.com/Azure/AKS-Landing-Zone-Accelerator.git
 
 * Go to the Backup & Restore directory:
 ```bash
-cd AKS-Landing-Zone-Accelerator/Scenarios/backup_restore/velero_terraform_sample
+cd AKS-Landing-Zone-Accelerator/Scenarios/Backup-Restore/velero_terraform_sample
 ```
 
 * Create the Service Principal, representing Velero, to perform backups & restores:
