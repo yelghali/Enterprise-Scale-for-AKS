@@ -119,7 +119,7 @@ You can see the supported Velero values: https://github.com/vmware-tanzu/helm-ch
 
 ```hcl
 velero_default_values = {
-    "restoreOnlyMode"                                               = try(var.velero_restore_mode_only, "false")
+    "restoreOnlyMode"                                           = try(var.velero_restore_mode_only, "false")
     "configuration.backupStorageLocation.bucket"                = try(var.backups_stracc_container_name, "")
     "configuration.backupStorageLocation.config.resourceGroup"  = try(var.backups_rg_name, "")
     "configuration.backupStorageLocation.config.storageAccount" = try(var.backups_stracc_name, "")
