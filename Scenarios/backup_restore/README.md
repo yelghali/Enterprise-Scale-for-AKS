@@ -137,7 +137,7 @@ terraform apply
    ```bash
   velero backup describe manual-backup1 --details
     ```
-
+     ![Descrube backup](./media/describe_backup.png)
 
 * Restore to secondary AKS cluster:
   - Connect to the Secondary / Backup AKS Cluster (following the sample code as is): 
