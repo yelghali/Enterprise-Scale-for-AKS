@@ -94,7 +94,7 @@ terraform apply
 * Deploy [sample statefull applications](./applications_samples/):
 
    ```bash
-    kubectl apply -f ../application_samples/
+    kubectl apply -f ../applications_samples/
   ```
 
    - Wait for the applications to be running, and then create some data files (to test backups and restores):
