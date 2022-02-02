@@ -174,11 +174,6 @@ terraform apply
      ```bash
     velero restore describe restore1 --details
     ```
-
-  - Chek new restored pods / applications:
-    ```bash
-    kubectl get pods --all-namespaces
-    ```
   
    - Chek that data is restored (check existance of data files):
     ```bash
