@@ -97,7 +97,7 @@ terraform apply
     kubectl apply -f ../application_samples/
   ```
 
-   - Wait for applications to be running, and then create some data files (to test backups and restores):
+   - Wait for the applications to be running, and then create some data files (to test backups and restores):
   ```bash
     kubectl exec -it nginx-csi-disk-zrs -n csi-disk-zrs -- touch /mnt/azuredisk/some-data-file.txt
 
