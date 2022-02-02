@@ -4,11 +4,11 @@
 
 ## High Availability Considerations
 * **AKS Cluster Configuration**:
-* Enable Uptime SLA for production workloads
-* Use Availability Zones (with Standard Load Balancer)
-* Use multiple node pools & nodes spanning AZs
-* Configure resource requests and limits
-* Configure Taints & Tolerations, Node & Pod Affinity
+	- Enable Uptime SLA for production workloads
+	- Use Availability Zones (with Standard Load Balancer)
+	- Use multiple node pools & nodes spanning AZs
+	- Configure resource requests and limits
+	- Configure Taints & Tolerations, Node & Pod Affinity
 
 
 
@@ -26,9 +26,9 @@ Scheduling workloads with AZs, see the article: https://docs.microsoft.com/en-us
 
 * **Data**: 
 Storage Class Configuration (used to create dynamic peristent volumes)
-* Use CSI Driver as it is the standard provider for exposing storage to applications running on Kubernetes
-* Use Azure Disk with ZRS (currently in Preview) --> available via Azure Disk CSI Driver
-* Use Azure File with ZRS
+- Use CSI Driver as it is the standard provider for exposing storage to applications running on Kubernetes
+- Use Azure Disk with ZRS (currently in Preview) --> available via Azure Disk CSI Driver
+- Use Azure File with ZRS
 
 
 ## Disaster Recovey Considerations
