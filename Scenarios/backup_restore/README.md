@@ -175,7 +175,7 @@ terraform apply
     velero restore describe restore1 --details
     ```
   
-   - Chek that data is restored (check existance of data files):
+   - Chek that data is restored (verify existence of data files):
     ```bash
       kubectl exec -it nginx-csi-disk-zrs -n csi-disk-zrs -- ls /mnt/azuredisk/some-data-file.txt
 
@@ -198,7 +198,7 @@ terraform apply
 
 :arrow_forward: [Deep Dive on Velero configuration for AKS](./velero_terraform_sample)
 
-## Comming Soon !
+## Coming Soon !
 * Snapshot based Backups using Velero CSI Plugin 
 * Deploy Velero as part of the AKS-Secure-Baseline-PrivateCluster
 
