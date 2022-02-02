@@ -1,0 +1,15 @@
+---
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotClass 
+metadata: 
+  name: backups-aks1 
+  annotations:
+    velero.io/csi-volumesnapshot-class: "true"
+driver: disk.csi.azure.com 
+deletionPolicy: Delete
+parameters:
+  tags: 'class=northeurope,bar=bbb' 
+  #location: northeurope
+  #region: northeurope
+  resourceGroup: backups-aks1
+  #resourceGroup: backupwesteurope
