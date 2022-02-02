@@ -55,6 +55,6 @@ Storage Class Configuration (used to create dynamic peristent volumes)
 	To restore **statefull** Application, you need to backup and restore:
 	* Cluster configuration (storage classes, volumesnapshotclasses, technical pods)
 	*  Persistent Volumes (Azure Disk & Azure Fileshare)
-	*  Application Configuration (linked with the restored persistent volumes)
+	*  Application Configuration (bound to the restored persistent volumes)
 
 
