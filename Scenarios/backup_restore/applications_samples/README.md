@@ -2,7 +2,7 @@
 
 Each sample uses a different storage class configuration to configure persisent volumes.
 
-In theses samples, a POD annotation is used to explicitly enable restic (filesystem) backup, for the disk mounted to the application / POD.
+In theses samples, a POD annotation is used to explicitly enable filesystem backup with Velero/Restic, for a disk mounted to the application / POD
 ```
 kind: Pod
 apiVersion: v1
