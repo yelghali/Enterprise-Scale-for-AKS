@@ -62,13 +62,11 @@ module "velero" {
   backups_stracc_name           = var.backups_stracc_name
   backups_stracc_container_name           = var.backups_stracc_container_name
   aks_nodes_resource_group_name = data.azurerm_kubernetes_cluster.aks.node_resource_group
-  
-  velero_azureidentity_name = "veleroaks1"
+
   velero_namespace        = var.velero_namespace
   velero_chart_repository = var.velero_chart_repository
   velero_chart_version    = var.velero_chart_version
   velero_values           = var.velero_values
-  velero_restore_mode_only           = "false" #default value
 
 
   velero_sp_tenantID = data.azurerm_client_config.current.tenant_id 
