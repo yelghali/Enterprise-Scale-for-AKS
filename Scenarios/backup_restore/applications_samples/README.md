@@ -2,8 +2,6 @@
 
 Each sample uses a different storage class configuration to configure persisent volumes.
 
-
-**Standard method using CSI Driver**:
 * provisioner: disk.csi.azure.com
   - azuredisk_csi_LRS.yaml  
   - azuredisk_csi_ZRS.yaml  
@@ -11,7 +9,6 @@ Each sample uses a different storage class configuration to configure persisent 
 * provisioner: file.csi.azure.com
   - azurefile_csi_ZRS.yaml  
 
-**Backward compatibility**:
 * provisioner: kubernetes.io/azure-file
   - azurefile_LRS.yaml  
 
