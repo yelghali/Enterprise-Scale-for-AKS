@@ -77,7 +77,7 @@ terraform apply
      az aks get-credentials --name primary-aks1 --overwrite-existing --resource-group primary-aks1
   ```
   
-   - Check that velero is installed and runningcorrectly: 
+   - Check that velero is installed and running correctly: 
   ```bash
   kubectl get pods -n velero
   ```
