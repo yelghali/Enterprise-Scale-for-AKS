@@ -19,7 +19,7 @@ If a workload cluster crashes and fails to recover, you can use a Velero backup 
 
 ## See it in action (it takes 15 minutes) !
 
-The sample code provides a [Terraform module](./velero_terraform_sample/) to install & confiugre Velero.
+The sample code provides a Terraform module to install & confiugre Velero.
 
 
 The implemented scenario using this sample, shows how to backup a primary AKS cluster, and restore it to a seconday cluster (in a secondary region):
