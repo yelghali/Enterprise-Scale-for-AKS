@@ -8,8 +8,9 @@ resource "azurerm_resource_group" "aks1_backups" {
   tags     = var.tags
 }
 
+
 resource "azurerm_storage_account" "aks1_backups" {
-  name                     = var.backups_stracc_name
+  name                     = "${local.random_stracc_name}"
   resource_group_name      = azurerm_resource_group.aks1_backups.name
   location                 = azurerm_resource_group.aks1_backups.location
   account_tier             = "Standard"

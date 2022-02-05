@@ -27,7 +27,8 @@ data "azurerm_resource_group" "velero" {
 
 data "azurerm_storage_account" "velero" {
   depends_on = [azurerm_storage_account.aks1_backups]
-  name  = var.backups_stracc_name
+  #name  = var.backups_stracc_name
+  name  = "${local.random_stracc_name}"
   resource_group_name  = var.backups_rg_name
 }
 
@@ -100,11 +101,11 @@ module "velero" {
 
   backups_region       = var.backups_region
   backups_rg_name           = var.backups_rg_name
-  backups_stracc_name           = var.backups_stracc_name
+  #backups_stracc_name           = var.backups_stracc_name
+  backups_stracc_name  = "${local.random_stracc_name}"
   backups_stracc_container_name           = var.backups_stracc_container_name
   aks_nodes_resource_group_name = data.azurerm_kubernetes_cluster.aks.node_resource_group
   
-  #velero_azureidentity_name = "veleroaks1"
   velero_namespace        = var.velero_namespace
   velero_chart_repository = var.velero_chart_repository
   velero_chart_version    = var.velero_chart_version
@@ -133,12 +134,11 @@ module "veleroaksdr" {
 
   backups_region       = var.backups_region
   backups_rg_name           = var.backups_rg_name
-  backups_stracc_name           = var.backups_stracc_name
+  #backups_stracc_name           = var.backups_stracc_name
+  backups_stracc_name  = "${local.random_stracc_name}"
   backups_stracc_container_name           = var.backups_stracc_container_name
-  #backups_stracc_container_name           = "veleroforaksdr"  #todo: put in var
   aks_nodes_resource_group_name = data.azurerm_kubernetes_cluster.aks_dr.node_resource_group
   
-  #velero_azureidentity_name = "veleroaksdr"
   velero_namespace        = var.velero_namespace
   velero_chart_repository = var.velero_chart_repository
   velero_chart_version    = var.velero_chart_version
