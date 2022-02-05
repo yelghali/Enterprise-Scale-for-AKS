@@ -98,7 +98,7 @@ module "velero" {
  <a href="./03-backup-location.tf" target="_blank">03-backup-location.tf</a>:
   - Creates a Resource Group in Secondary Region, for hosting storage location (to store backups and velero configuration)
   - Creates a storage account 
-  - Creates a storage container, used by velero (Optionnaly, you could create a secondary container, to backup to backup cluster)
+  - Creates a storage container, used by velero (Optionnaly, you could create a secondary container, to backup your backup cluster)
 
 
  <a href="./main.tf" target="_blank">maint.tf</a>:
