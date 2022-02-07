@@ -34,7 +34,7 @@ Storage Class Configuration (used to create dynamic peristent volumes)
 ## Disaster Recovey Considerations
 
 
-* Prepare Identities
+* Prepare Cluster & POD Identities
 * Plan network segmentation & DNS resolution
 * Prepare storage location in DR Region to store backups
 * for AKS configuration: 
