@@ -59,7 +59,7 @@ Velero’s backups are split into 2 pieces :
 
    -    If you are using StorageClasses with provisioners `disk.csi.azure.com` and `file.csi.azure.com`:
           - using CSI drivers for Azure Disk and Azure File is the standard, with ZRS sku for availbility zone support.
-          - Regional volume snapshot with CSI Driver is coming soon ! to Restore to a cluster in a secondary region, use Restic for now
+          - Regional volume snapshot with CSI Driver is coming soon ! --> to Restore to a cluster in a secondary region, use Restic for now
 
    -    Note on <a href="https://docs.microsoft.com/en-us/azure/aks/availability-zones#azure-disk-availability-zone-support" target="_blank">Azure Disk Availability Zone support</a>
            - Volumes that use Azure managed LRS disks are not zone-redundant resources, those volumes cannot be attached across zones and must be co-located in the same zone as a given node hosting the target pod   
