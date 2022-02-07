@@ -39,7 +39,7 @@ Velero’s backups are split into 2 pieces
 
 
 
-*Backup & Restore of metadata + cluster configuration*
+**Backup & Restore of metadata + cluster configuration**
 
   -  Velero has a concept of *BackupStorageLocation* : defined as a bucket or a prefix within a bucket under which all Velero data is stored.
 
@@ -49,8 +49,11 @@ Velero’s backups are split into 2 pieces
 
 
 
-*Backup & Restore of persistent volumes*
-    -    If you are using StorageClasses with provisioners `kubernetes.io/azure-disk` and `kubernetes.io/azure-file`:
+
+
+**Backup & Restore of persistent volumes**
+
+     -    If you are using StorageClasses with provisioners `kubernetes.io/azure-disk` and `kubernetes.io/azure-file`:
         - It might be simpler to use filesystem backup with Restic
 
     -    If you are using StorageClasses with provisioners `disk.csi.azure.com` and `file.csi.azure.com`:
