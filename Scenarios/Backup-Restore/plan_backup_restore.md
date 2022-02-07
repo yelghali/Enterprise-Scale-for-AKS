@@ -38,12 +38,12 @@ Storage Class Configuration (used to create dynamic peristent volumes)
 * Plan network segmentation & DNS resolution
 * Prepare storage location in DR Region to store backups
 
-* Prepare Node Pools :
+* Prepare Cluster Node Pools :
   * Create Nodes & re-deploy Node Configuration
   * Use Node Configuration Snapshot (currently in Preview)
 
 
-* Prepapre Persistent volumes : 
+* Prepapre Applications Persistent volumes : 
   * Prepare Storage classes & snapshot classes (naming, sku, topology aware configuration, binding mode)
 
 
