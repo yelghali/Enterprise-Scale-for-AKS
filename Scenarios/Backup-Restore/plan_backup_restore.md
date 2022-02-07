@@ -37,12 +37,14 @@ Storage Class Configuration (used to create dynamic peristent volumes)
 * Prepare Cluster & POD Identities
 * Plan network segmentation & DNS resolution
 * Prepare storage location in DR Region to store backups
-* for AKS configuration: 
-  * Prepare Storage classes & snapshot classes (naming, sku, topology aware configuration, binding mode)
 
-* Node Pool Configuration
+* Prepare Node Pools :
   * Create Nodes & re-deploy Node Configuration
   * Use Node Configuration Snapshot (currently in Preview)
+
+
+* Prepapre Persistent volumes : 
+  * Prepare Storage classes & snapshot classes (naming, sku, topology aware configuration, binding mode)
 
 
 * Run a Drill Tests:
