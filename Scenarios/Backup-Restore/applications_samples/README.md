@@ -15,7 +15,8 @@ Each sample uses a different storage class configuration to configure persisent 
 * provisioner: kubernetes.io/azure-disk
   - statefulset-disk.yaml (statefulset)
 
-In theses samples, a POD annotation is used to explicitly enable filesystem backup with Velero/Restic, for a disk mounted to the application / POD. See https://velero.io/docs/v1.8/restic/#how-backup-and-restore-work-with-restic
+In theses samples, a POD annotation is used to explicitly enable filesystem backup with Velero/Restic, for a disk mounted to the application / POD. 
+See https://velero.io/docs/v1.8/restic/#how-backup-and-restore-work-with-restic
 ```
 kind: Pod
 apiVersion: v1
