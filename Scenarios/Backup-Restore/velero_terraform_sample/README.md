@@ -32,7 +32,7 @@ Velero is a plugin based tool. You can use the following plugins to run Velero o
     
 ## Which plugin to use ?
 
-Velero’s backups are split into 2 pieces 
+Velero’s backups are split into 2 pieces :
 - the metadata + cluster configuration stored in object storage, 
 - and snapshots/backups of the persistent volumes
 
