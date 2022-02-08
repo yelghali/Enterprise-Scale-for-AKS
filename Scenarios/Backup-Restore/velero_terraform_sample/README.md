@@ -16,8 +16,10 @@ Velero is a plugin based tool. You can use the following plugins to run Velero o
 
  <a href="https://github.com/vmware-tanzu/velero-plugin-for-csi" target="_blank">velero-plugin-for-csi</a>
   - **A volume snapshotter plugin** for CSI backed PVCs using the CSI beta snapshot APIs for Kubernetes.
-  - It supports Azure Disk `disk.csi.azure.com`(Azure Disk ZRS sku, available only with CSI Driver)
-  - Volume snapshots are configured using a <a href="https://github.com/kubernetes-sigs/azuredisk-csi-driver/blob/master/docs/driver-parameters.md#volumesnapshotclass" target="_blank">VolumeSnapshotClass</a>
+  - It supports Azure Disk `disk.csi.azure.com` and Azure File `file.csi.azure.com`
+  - Volume snapshots are configured using a VolumeSnapshotClass:
+        - <a href="https://github.com/kubernetes-sigs/azuredisk-csi-driver/blob/master/deploy/example/snapshot/storageclass-azuredisk-snapshot.yaml" target="_blank">Azure Disk VolumeSnapshotClass</a>
+        - <a href="https://github.com/kubernetes-sigs/azurefile-csi-driver/blob/master/deploy/example/snapshot/volumesnapshotclass-azurefile.yaml" target="_blank">Azure File VolumeSnapshotClass</a>
   - Limitation: Currently CSI snapshots in a different region from the primary AKS cluster, is not suppored -> Coming Soon !
 
   <a href="https://velero.io/docs/v1.7/restic/" target="_blank">restic</a>
