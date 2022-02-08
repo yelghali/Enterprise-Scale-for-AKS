@@ -178,6 +178,11 @@ terraform apply
     velero restore describe restore1 --details
     ```
   
+   - check restore logs 
+    ```bash
+    velero restore logs restore1
+    ```
+  
    - Chek that data is restored (verify existence of data files):
     ```bash
       kubectl exec -it nginx-csi-disk-zrs -n csi-disk-zrs -- ls /mnt/azuredisk/some-data-file.txt
