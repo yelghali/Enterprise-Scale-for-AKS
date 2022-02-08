@@ -65,7 +65,9 @@ terraform apply
 ```
 
 * Check that the install is successfull: 
-  - First, install Velero client (CLI) to interact with Velero Server (pods deployed on AKS cluster): https://velero.io/docs/v1.7/basic-install/#install-the-cli
+  - First, install Velero client (CLI) to interact with Velero Server (pods deployed on AKS cluster):
+       - You can download the client binary for linux : https://github.com/vmware-tanzu/velero/releases/tag/v1.7.1
+       - Or checkout other options for Windows & MAC  https://velero.io/docs/v1.7/basic-install/#install-the-cli
 
     If you are using Azure Cloud Shell, you cannot run "sudo" commands. Instead, you can download velero binary and use an alias to reference it
      ```bash
