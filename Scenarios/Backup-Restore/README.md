@@ -16,6 +16,7 @@ If a workload cluster crashes and fails to recover, you can use a Velero backup 
 
 ![Velero Architecture screenshot](./media/architecture_velero.png)
 
+Check out How Velero works  https://www.youtube.com/watch?v=8skHGzUBZ-Q
 
 ## See it in action (it takes 15 minutes) !
 
