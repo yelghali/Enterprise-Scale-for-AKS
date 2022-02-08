@@ -179,9 +179,9 @@ terraform apply
     ```
   
    - check restore logs 
-    ```bash
-    velero restore logs restore1
-    ```
+        ```bash
+        velero restore logs restore1
+        ```
   
    - Chek that data is restored (verify existence of data files):
     ```bash
