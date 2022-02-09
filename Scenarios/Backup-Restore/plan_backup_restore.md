@@ -4,11 +4,11 @@
 
 ## High Availability Considerations
 * **AKS Cluster Configuration**:
-	- Enable Uptime SLA for production workloads
-	- Use Availability Zones (with Standard Load Balancer)
-	- Use multiple node pools & nodes spanning AZs
-	- Configure resource requests and limits
-	- Configure Taints & Tolerations, Node & Pod Affinity
+	- Enable [Uptime SLA](https://docs.microsoft.com/en-us/azure/aks/uptime-sla) for production workloads
+	- Use [Availability Zones](https://docs.microsoft.com/en-us/azure/aks/availability-zones) (with Standard Load Balancer)
+	- Use [multiple node pools](https://docs.microsoft.com/en-us/azure/aks/use-multiple-node-pools) spanning AZs
+	- Enforce [Resource Quotas](https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-scheduler#enforce-resource-quotas) and Plan for [pod disruption budgets](https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-scheduler#plan-for-availability-using-pod-disruption-budgets)
+	- Control Pod scheduling using [Taints & Tolerations](https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-advanced-scheduler#provide-dedicated-nodes-using-taints-and-tolerations), & [Pod Affinity](https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-advanced-scheduler#control-pod-scheduling-using-node-selectors-and-affinity)
 
 
 
