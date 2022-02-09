@@ -40,7 +40,7 @@ Storage Class Configuration (used to create dynamic peristent volumes)
 
 * Prepare Cluster Node Pools :
   * Create Nodes & re-deploy Node Configuration
-  * Use Node Configuration Snapshot (currently in Preview)
+  * Use [Node Pool Snapshot](https://docs.microsoft.com/en-us/azure/aks/node-pool-snapshot) (currently in Preview with [limitations](https://docs.microsoft.com/en-us/azure/aks/node-pool-snapshot#limitations))
 
 
 * Prepapre Applications Persistent volumes : 
