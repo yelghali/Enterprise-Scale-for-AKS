@@ -33,18 +33,18 @@ Storage Class Configuration (used to create dynamic peristent volumes)
 
 ## Disaster Recovey Considerations
 
+* Plan for Disaster Recovery
+	-  Prepare Cluster & POD Identities
+	- Plan network segmentation & DNS resolution
+	- Prepare storage location in DR Region to store backups
 
-* Prepare Cluster & POD Identities
-* Plan network segmentation & DNS resolution
-* Prepare storage location in DR Region to store backups
-
-* Prepare Cluster Node Pools :
-  * Create Nodes & re-deploy Node Configuration
-  * Use [Node Pool Snapshot](https://docs.microsoft.com/en-us/azure/aks/node-pool-snapshot) (currently in Preview with [limitations](https://docs.microsoft.com/en-us/azure/aks/node-pool-snapshot#limitations))
+	- Prepare Cluster Node Pools :
+	  - Create Nodes & re-deploy Node Configuration
+	  -  Use [Node Pool Snapshot](https://docs.microsoft.com/en-us/azure/aks/node-pool-snapshot) (currently in Preview with [limitations](https://docs.microsoft.com/en-us/azure/aks/node-pool-snapshot#limitations))
 
 
-* Prepapre Applications Persistent volumes : 
-  * Prepare StorageClasses & VolumeSnapshotClasses (naming, sku, topology aware configuration, binding mode)
+	-  Prepapre Applications Persistent volumes : 
+	  -  Prepare StorageClasses & VolumeSnapshotClasses (naming, sku, topology aware configuration, binding mode)
 
 
 * Run a Drill Tests:
