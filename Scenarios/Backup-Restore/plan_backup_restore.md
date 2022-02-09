@@ -13,7 +13,7 @@
 
 
 * **Applications**: 
-Scheduling workloads with AZs, see the article: https://docs.microsoft.com/en-us/azure/aks/operator-best-practices-advanced-scheduler
+  - Configure applications [requests & limits](https://docs.microsoft.com/en-us/azure/aks/developer-best-practices-resource-management#define-pod-resource-requests-and-limits)
   - to ensure pod replicas are spread evenly across zones : Use Pod Topology Aware Scheduling 
   - to ensure the PVs are located in the same zone as the pods:
      - Use Volume Binding Mode: WaitForFirstConsumer
