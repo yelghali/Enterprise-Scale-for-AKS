@@ -44,7 +44,7 @@ Storage Class Configuration (used to create dynamic peristent volumes)
 
 
 * Prepapre Applications Persistent volumes : 
-  * Prepare Storage classes & snapshot classes (naming, sku, topology aware configuration, binding mode)
+  * Prepare StorageClasses & VolumeSnapshotClasses (naming, sku, topology aware configuration, binding mode)
 
 
 * Run a Drill Tests:
